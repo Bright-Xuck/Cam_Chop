@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@reference "tailwindcss";
+
+.dropbtn, li a {
+  @apply rounded-b-lg py-2  flex items-center gap-3.5 ;
+}
+
+.dropbtn{
+  @apply flex text-red-400 ;
+}

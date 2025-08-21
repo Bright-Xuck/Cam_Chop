@@ -4,9 +4,11 @@ import Shop from "./pages/Shop";
 import Landing from "./pages/landing";
 import Signup from "./pages/Signup";
 import LoginPage from "./pages/Login";
-//import merchantDashboard from "./pages/merchantdashboard";
+import Merchant from "./pages/merchantdashboard";
 import { useState } from "react";
 import Nav from "./Components/nav";
+import Merchantlayout from "./Components/merchantLayout";
+import Customerlayout from "./Components/customerlayout";
 
 export default function App() {
 
@@ -14,26 +16,51 @@ export default function App() {
 
   return (
     <HashRouter>
-      {/* <Nav /> */}
       <Routes>
-        <Route path="/" element={<Landing />} />
+        <Route path="/" element={<Customerlayout>
+          <Landing />
+          </Customerlayout>}
+           />
         <Route path="/shop" element={<Shop />} />
          <Route
           path="/signup"
           element={
+            <Customerlayout>
             <Signup
       userDatabase={userDatabase}
       setUserDatabase={setUserDatabase}
     />
+    </Customerlayout>
           }
         />
          <Route
           path="/login"
           element={
+            <Customerlayout>
             <LoginPage data={userDatabase} />
+            </Customerlayout>
           }
         />
-        {/* <Route path="/merchant" element={<merchantDashboard/>} /> */}
+        <Route path="/merchant" element={
+          <Merchantlayout>
+            <Merchant/>
+          </Merchantlayout>
+        } />
+        <Route path="/merchant" element={
+          <Merchantlayout>
+            <div>About</div>
+          </Merchantlayout>
+        } />
+        <Route path="/merchant" element={
+          <Merchantlayout>
+            <div>About</div>
+          </Merchantlayout>
+        } />
+        <Route path="/merchant/about" element={
+          <Merchantlayout>
+            <div>About</div>
+          </Merchantlayout>
+        } />
       </Routes>
     </HashRouter>
   );
