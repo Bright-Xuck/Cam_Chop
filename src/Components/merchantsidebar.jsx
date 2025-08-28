@@ -1,11 +1,11 @@
-
+import { Link } from "react-router";
 import { Home } from "lucide-react";
 import "/src/buttons.module.css"
 import { ChevronDown } from "lucide-react";
 import { useState } from "react";
 
 export default function Sidebar() {
-     
+  
 const[open, Setopen] = useState({
  show1: false,
  show2: false
@@ -58,9 +58,9 @@ function toggle(name){
             </ul>
         </li>
         <li>
-          <a href="">
+          <Link to="/merchant/Additem" className=" flex items-center gap-3.5" >
             <Home/>
-            <span>Calender</span></a>
+            <span>Add Item</span></Link>
         </li>
         <li>
           <a href="">

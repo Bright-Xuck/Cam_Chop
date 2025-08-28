@@ -1,0 +1,11 @@
+@import "tailwindcss";
+@reference "tailwindcss";
+
+
+li > div{
+    @apply grid grid-cols-[1fr_auto];
+}
+
+.main > li{
+    @apply py-6 border-b border-b-neutral-500;
+}

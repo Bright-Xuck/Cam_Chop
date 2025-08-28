@@ -9,6 +9,7 @@ import { useState } from "react";
 import Nav from "./Components/nav";
 import Merchantlayout from "./Components/merchantLayout";
 import Customerlayout from "./Components/customerlayout";
+import Additem from "./Components/Additem";
 
 export default function App() {
 
@@ -21,7 +22,7 @@ export default function App() {
           <Landing />
           </Customerlayout>}
            />
-        <Route path="/shop" element={<Shop />} />
+        <Route path="/shop" element={<Customerlayout><Shop /></Customerlayout> } />
          <Route
           path="/signup"
           element={
@@ -46,9 +47,9 @@ export default function App() {
             <Merchant/>
           </Merchantlayout>
         } />
-        <Route path="/merchant" element={
+        <Route path="/merchant/Additem" element={
           <Merchantlayout>
-            <div>About</div>
+            <Additem/>
           </Merchantlayout>
         } />
         <Route path="/merchant" element={

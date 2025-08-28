@@ -4,11 +4,8 @@ import Nav from "../Components/nav";
 export default function Landing() {
   return (
     <>
-      <Nav />
-      <main className="">
-        <section>
-        </section>
-        <section className="flex items-center w-4/5 gap-[8rem] h-[100vh] max-sm:flex-col mr-auto ml-auto max-sm:mt-[5rem]  max-sm:w-4/5 max-sm:h-[100vh] max-sm:gap-[4rem]">
+      <main className="pb-30">
+        <section className="flex items-center w-4/5 gap-[8rem] h-[90vh] max-sm:flex-col mr-auto ml-auto max-sm:mt-[5rem]  max-sm:w-4/5 max-sm:h-[100vh] max-sm:gap-[4rem]">
           <div className="grid grid-cols-1 max-sm:flex">
             <img src="../photos/ScootScoot.svg" alt="" className="h-[15rem] max-sm:w-[8rem]" />
             <div>
