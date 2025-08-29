@@ -1,7 +1,10 @@
 import { Store, PlusCircle, ClipboardList, Layers, Rocket } from "lucide-react";
 import { Link } from "react-router";
-
+import { useMerchant } from "../context/MerchantProvider";
 export default function Merchant() {
+  const { currentUser} = useMerchant()
+
+ 
   const steps = [
     {
       icon: <Store className="text-green-600 w-6 h-6" />,
@@ -41,7 +44,7 @@ export default function Merchant() {
       <div className="w-3/5">
         <article className="mb-6">
           <h1 className="text-xl font-bold mb-2">
-            Welcome to your new store, The current person logged In
+            Welcome to your new store, {"Person Logged in"}
           </h1>
           <p className="text-gray-600">
             This is your quick start guide. Complete these steps to activate

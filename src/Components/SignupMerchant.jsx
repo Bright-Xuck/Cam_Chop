@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router"
+import { useEffect } from "react"
 export default function SignupMerchant({merchantDatabase, setMerchantDatabase}){
 
     const naviagte = useNavigate()
@@ -6,10 +7,17 @@ export default function SignupMerchant({merchantDatabase, setMerchantDatabase}){
         event.preventDefault()
         const data = new FormData(event.target)
         const merchantdata = Object.fromEntries(data.entries())
-        setMerchantDatabase([...merchantDatabase, merchantdata])
-        console.log(merchantDatabase)
+
+        const newMerchant ={
+            id: merchantDatabase.length + 1,
+            ...merchantdata
+        }
+        setMerchantDatabase([...merchantDatabase, newMerchant])
         naviagte("/merchant/login")
     }
+
+    useEffect(() =>{console.log(merchantDatabase)}, [merchantDatabase])
+    
     return(
         <>
         <main className="">

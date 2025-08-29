@@ -6,7 +6,7 @@ export default function Merchantlayout({children}){
             <div className="">
             <Sidebar />
             </div>
-            <div className="w-full">
+            <div className="">
             {children}
             </div>
         </div>

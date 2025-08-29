@@ -12,10 +12,12 @@ import Customerlayout from "./Components/customerlayout";
 import Additem from "./Components/Additem";
 import SignupMerchant from "./Components/SignupMerchant";
 import LoginMerchant from "./Components/LoginMerchant";
+import {merchants} from "./data/merchants";
+
 
 export default function App() {
   const [userDatabase, setUserDatabase] = useState([]);
-  const [merchantDatabase, setMerchantDatabase] = useState([])
+  const [merchantDatabase, setMerchantDatabase] = useState(merchants)
 
   return (
     <HashRouter>
@@ -80,6 +82,7 @@ export default function App() {
            />
           }
         />
+        
         <Route
           path="/merchant/login"
           element={

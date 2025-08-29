@@ -2,7 +2,6 @@ import { Link } from "react-router";
 import { ChevronDown } from "lucide-react";
 import styles from "/src/div.module.css";
 import { useState } from "react";
-import Footer from "../Components/footer";
 import FoodMenu from "../Components/foodmenu";
 
 export default function Shop() {
@@ -122,7 +121,6 @@ export default function Shop() {
           </li>
         </ul>
       </section>
-      <Footer/>
     </main>
   );
 }
