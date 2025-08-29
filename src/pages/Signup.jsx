@@ -1,7 +1,7 @@
-import SignupMerchant from "../Components/SignupMerchant"
+import SignupCustomer from "../Components/SignupCustomer"
 export default function Signup({ userDatabase, setUserDatabase }){
     return(
-        <SignupMerchant 
+        <SignupCustomer
          userDatabase={userDatabase} 
       setUserDatabase={setUserDatabase} 
       />

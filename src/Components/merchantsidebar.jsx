@@ -17,7 +17,7 @@ function toggle(name){
     }))
 }
   return (
-    <nav className="box-border h-[100vh] w-[150px] py-1.5 px-4 justify-start">
+    <nav className="box-border h-[100vh] w-[150px] py-1.5 px-3 p justify-start border-r-2 border-r-neutral-200 ">
       <ul className="list-none h-[100%] flex flex-col gap-2">
         <li className="flex justify-end ">
             <span><Home/></span>

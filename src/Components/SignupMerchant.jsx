@@ -1,62 +1,44 @@
 import { useNavigate } from "react-router"
+export default function SignupMerchant({merchantDatabase, setMerchantDatabase}){
 
-export default function SignupMerchant({userDatabase, setUserDatabase }){
- 
-const navigate = useNavigate()
-    function handleSubmit(event){
+    const naviagte = useNavigate()
+    function GetMerchant(event){
         event.preventDefault()
-
-        const formData = new FormData(event.target)
-        const data = Object.fromEntries(formData.entries())
-        setUserDatabase([...userDatabase, data])
-        navigate("/login")
+        const data = new FormData(event.target)
+        const merchantdata = Object.fromEntries(data.entries())
+        setMerchantDatabase([...merchantDatabase, merchantdata])
+        console.log(merchantDatabase)
+        naviagte("/merchant/login")
     }
-    
-    
-    console.log(userDatabase)
-
     return(
-        <section className=" flex flex-col justify-center h-[100vh] mt-0">
-            <div className="mb-10">
-    <h1 className="text-center">Sign Up</h1>
-    <p className="text-center">Already Have an account? <a href="Signin.html">Sign in</a></p>
-    </div>
-    <section>
-    <form onSubmit={handleSubmit} className="grid gap-2 grid-cols-2 grid-rows-[auto,1fr,1fr]  w-[60%] m-auto">
-        <div className="flex flex-col">
-        <label htmlFor="firstname" className="col-span-1">First Name</label>
-        <input type="text" id="firstname" name="firstname"required autoComplete="name" className="col-span-2 rounded-4xl border"/>
+        <>
+        <main className="">
+        <h1>Sign Up for CamChop and unlock Sales</h1>
+        <form action="" onSubmit={GetMerchant} className="border border-black w-3/5 m-auto">
+            <h3>0% commissions for up to 30 days</h3>
+            <p >Partner with CamChop to help drive growth and take your business to the next level</p>
+            <div className="grid grid-cols-2 gap-4 p-3">
+            <input type="text" name="name" id="name" placeholder="Business Name" className="col-span-2"/>
+            <input type="text" name="location" id="location" placeholder="Business Address" className="col-span-2"/>
+            <input type="email" name="email" id="email" placeholder="Email Address"/>
+            <input type="tel" name="tel" id="tel" placeholder="Business Phone"/>
+            </div>
+            <p>By clicking "Start", I agree to receive marketing electronic communications from CamChop</p>
+            <button className="bg-red-500">Start</button>
+        </form>
+    </main>
+    <section className="">
+        <h1>Your door to more profitable growth</h1>
+        <h3>We're here to help you navigate the endless complexities of running a business.
+        </h3>
+        <div className="promo">
+            <i>logo, Marketplace</i>
+            <div className="list sheesh"><span>Delivery & Pickup</span>-Convenient ordering for customers</div>
+            <div className="list"><span>Promotions</span>-Customizable promotions for your store or items</div>
+            <div className="list"><span>Sponsored Listings</span>-In-site advertisement to get your store seen</div>
+            <img src="./frontend/photos/IMG_2564.jpg" alt=""/>
         </div>
-        <div className="flex flex-col">
-        <label htmlFor="lastname" className="col-span-1">Last Name</label>
-        <input type="text" name="lastname" id="lastname" required autoComplete="name" className="col-span-2 rounded-4xl border"/>
-        </div>
-        <div className="col-span-2 flex flex-col gap-1.5">
-        <label className="" htmlFor="mail">Email</label>
-        <input type="email" id="mail" name="email" required autoComplete="email" className=" bg-red-300 rounded-4xl border-black border"/>
-        </div>
-        <div className="col-span-2 flex flex-col gap-1.5">
-        <label htmlFor="phone" className="">Phone Number</label>
-        <input type="tel" id="phone" required autoComplete="tel" className="rounded-4xl border-black border"/>
-        </div>
-        <div className="col-span-2 flex flex-col gap-1.5">
-        <label htmlFor="passwords" className="">Phone Number</label>
-        <input type="password" id="passwords" name="password" required className="rounded-4xl border-black border"/>
-        </div>
-        <p className="col-span-2">By tapping "sign-up" or "continue with" you agree to CamChop's Terms and Privacy Policy. We may text you a verification code. Msg Data rates may apply.</p>
-        <button className="col-span-2 bg-amber-300">Sign-Up</button>
-    </form>
     </section>
-    <p > or </p>
-    <div >
-        <div >
-            <a href="#">Continue with Google</a>
-        </div>
-        <div >
-            <a href="#">Continue with Apple</a>
-        </div>
-    </div>
-</section>
+    </>
     )
 }
-

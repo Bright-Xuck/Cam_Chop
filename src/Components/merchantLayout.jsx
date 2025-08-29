@@ -2,11 +2,11 @@ import Sidebar from "./merchantsidebar";
 
 export default function Merchantlayout({children}){
     return(
-        <div className="grid grid-cols-12 ">
-            <div className="col-span-3">
+        <div className="flex ">
+            <div className="">
             <Sidebar />
             </div>
-            <div className="col-span-9">
+            <div className="w-full">
             {children}
             </div>
         </div>
