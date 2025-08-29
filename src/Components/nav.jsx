@@ -3,7 +3,7 @@ import { MoveRight } from "lucide-react";
 
 export default function Nav() {
   return (
-  <nav className="grid grid-cols-2 fixed top-0 left-0 w-full justify-between items-center h-[5rem] border-b-2 shadow-md shadow-black ">
+  <nav className="grid grid-cols-2 fixed top-0 left-0 w-full justify-between items-center h-[5rem] border-b-2 shadow-md shadow-black z-50 bg-white">
         <div>
           <form action="" className="grid grid-cols-5 border rounded-2xl p-2 max-w-[300px]">
           <Search className="col-span-1" />

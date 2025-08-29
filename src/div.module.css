@@ -1,0 +1,7 @@
+@import "tailwindcss";
+@reference "tailwindcss";
+
+
+.main > li{
+    @apply py-6 border-b border-b-neutral-500;
+}

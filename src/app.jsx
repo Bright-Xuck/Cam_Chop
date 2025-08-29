@@ -4,36 +4,90 @@ import Shop from "./pages/Shop";
 import Landing from "./pages/landing";
 import Signup from "./pages/Signup";
 import LoginPage from "./pages/Login";
-//import merchantDashboard from "./pages/merchantdashboard";
+import Merchant from "./pages/merchantdashboard";
 import { useState } from "react";
 import Nav from "./Components/nav";
+import Merchantlayout from "./Components/merchantLayout";
+import Customerlayout from "./Components/customerlayout";
+import Additem from "./Components/Additem";
+import SignupMerchant from "./Components/SignupMerchant";
+import LoginMerchant from "./Components/LoginMerchant";
 
 export default function App() {
-
-    const [userDatabase, setUserDatabase] = useState([]);
+  const [userDatabase, setUserDatabase] = useState([]);
+  const [merchantDatabase, setMerchantDatabase] = useState([])
 
   return (
     <HashRouter>
-      {/* <Nav /> */}
       <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/shop" element={<Shop />} />
-         <Route
+        <Route
+          path="/"
+          element={
+            <Customerlayout>
+              <Landing />
+            </Customerlayout>
+          }
+        />
+        <Route
+          path="/shop"
+          element={
+            <Customerlayout>
+              <Shop />
+            </Customerlayout>
+          }
+        />
+        <Route
           path="/signup"
           element={
-            <Signup
-      userDatabase={userDatabase}
-      setUserDatabase={setUserDatabase}
-    />
+            <Customerlayout>
+              <Signup
+                userDatabase={userDatabase}
+                setUserDatabase={setUserDatabase}
+              />
+            </Customerlayout>
           }
         />
-         <Route
+        <Route
           path="/login"
           element={
-            <LoginPage data={userDatabase} />
+            <Customerlayout>
+              <LoginPage data={userDatabase} />
+            </Customerlayout>
           }
         />
-        {/* <Route path="/merchant" element={<merchantDashboard/>} /> */}
+        <Route
+          path="/merchant"
+          element={
+            <Merchantlayout>
+              <Merchant />
+            </Merchantlayout>
+          }
+        />
+        <Route
+          path="/merchant/Additem"
+          element={
+            <Merchantlayout>
+              <Additem />
+            </Merchantlayout>
+          }
+        />
+        <Route
+          path="/merchant/signup"
+          element={
+           <SignupMerchant
+            merchantDatabase={merchantDatabase}
+            setMerchantDatabase={setMerchantDatabase}
+           />
+          }
+        />
+        <Route
+          path="/merchant/login"
+          element={
+            <LoginMerchant 
+             merchantDatabase={merchantDatabase}
+             />
+          }
+        />
       </Routes>
     </HashRouter>
   );
