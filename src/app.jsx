@@ -13,6 +13,8 @@ import Additem from "./Components/Additem";
 import SignupMerchant from "./Components/SignupMerchant";
 import LoginMerchant from "./Components/LoginMerchant";
 import {merchants} from "./data/merchants";
+import MenuManager from "./Components/MenuManager";
+import AddMenu from "./Components/AddMenu";
 
 
 export default function App() {
@@ -66,10 +68,10 @@ export default function App() {
           }
         />
         <Route
-          path="/merchant/Additem"
+          path="/merchant/menu"
           element={
             <Merchantlayout>
-              <Additem />
+              <MenuManager />
             </Merchantlayout>
           }
         />
@@ -89,6 +91,15 @@ export default function App() {
             <LoginMerchant 
              merchantDatabase={merchantDatabase}
              />
+          }
+        />
+        
+        <Route
+          path="/merchant/addmenu"
+          element={
+            <Merchantlayout>
+              <AddMenu/>
+            </Merchantlayout>
           }
         />
       </Routes>

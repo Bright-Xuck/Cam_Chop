@@ -2,6 +2,8 @@
 export const products = [
   {
     id: 1,
+    menuid: 1,
+    merchantId: "m1",
     name: "Burger & Fries",
     price: 5.99,
     shortDesc: "Juicy grilled chicken with lettuce & mayo",
@@ -19,6 +21,8 @@ export const products = [
   },
   {
     id: 2,
+    menuid: 1,
+     merchantId: "m1",
     name: "Bread & Jam",
     price: 7.99,
     shortDesc: "Traditional Nigerian/Cameroonian soup",
@@ -33,6 +37,8 @@ export const products = [
   },
   {
     id: 3,
+    menuid: 1,
+     merchantId: "m1",
     name: "Pizza",
     price: 6.5,
     shortDesc: "Grilled spicy skewered beef",
@@ -47,6 +53,8 @@ export const products = [
   },
   {
     id: 4,
+    menuid: 1,
+     merchantId: "m1",
     name: "Margherita Pizza",
     price: 10.99,
     shortDesc: "Classic cheese & tomato pizza",
@@ -61,6 +69,8 @@ export const products = [
   },
   {
     id: 5,
+    menuid: 1,
+     merchantId: "m1",
     name: "Beef Shawarma",
     price: 8.99,
     shortDesc: "Middle Eastern style beef wrap",
@@ -75,6 +85,8 @@ export const products = [
   },
   {
     id: 6,
+    menuid: 1,
+     merchantId: "m1",
     name: "Vegetable Fried Rice",
     price: 6.99,
     shortDesc: "Stir-fried rice with veggies",
@@ -89,6 +101,8 @@ export const products = [
   },
   {
     id: 7,
+    menuid: 1,
+     merchantId: "m1",
     name: "Pounded Yam & Egusi",
     price: 9.5,
     shortDesc: "Staple swallow with soup",
@@ -103,6 +117,8 @@ export const products = [
   },
   {
     id: 8,
+    menuid: 1,
+     merchantId: "m1",
     name: "Grilled Fish",
     price: 12.0,
     shortDesc: "Charcoal-grilled whole fish",
@@ -117,6 +133,8 @@ export const products = [
   },
   {
     id: 9,
+    menuid: 1,
+     merchantId: "m1",
     name: "Spaghetti Bolognese",
     price: 11.5,
     shortDesc: "Italian pasta with beef sauce",
@@ -131,6 +149,8 @@ export const products = [
   },
   {
     id: 10,
+    menuid: 2,
+     merchantId: "m2",
     name: "Jollof Rice",
     price: 7.99,
     shortDesc: "West African jollof rice",
@@ -145,6 +165,8 @@ export const products = [
   },
   {
     id: 11,
+    menuid: 2,
+     merchantId: "m2",
     name: "Cheeseburger",
     price: 6.99,
     shortDesc: "Beef patty with cheese slice",
@@ -159,6 +181,8 @@ export const products = [
   },
   {
     id: 12,
+    menuid: 2,
+     merchantId: "m2",
     name: "Pepper Soup",
     price: 6.5,
     shortDesc: "Spicy light soup",
@@ -173,6 +197,8 @@ export const products = [
   },
   {
     id: 13,
+    menuid: 2,
+     merchantId: "m2",
     name: "French Fries",
     price: 3.5,
     shortDesc: "Crispy golden fries",

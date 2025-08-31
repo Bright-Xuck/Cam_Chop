@@ -12,6 +12,7 @@ import {
   Settings,
   HelpCircleIcon,
   User2Icon,
+  MenuIcon,
 } from "lucide-react";
 import "/src/buttons.module.css";
 import { useState } from "react";
@@ -24,7 +25,8 @@ export default function Sidebar() {
     show2: false,
     show3: false,
     show4: false,
-    show5: false
+    show5: false,
+    show6: false
   });
   function toggle(name) {
     Setopen((prev) => ({
@@ -206,19 +208,6 @@ export default function Sidebar() {
         </li>
         <li>
           <NavLink
-            to="/merchant/additem"
-            className={({ isActive }) =>
-              `flex text-left rounded-lg transition ${
-                isActive ? "bg-red-500 text-white" : "hover:bg-gray-200"
-              }`
-            }
-          >
-            <ListCheck />
-            <span>Add Item</span>
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
             to="/merchant/calender"
             className={({ isActive }) =>
               `flex items-center gap-1.5  rounded-lg transition ${
@@ -229,6 +218,39 @@ export default function Sidebar() {
             <ListOrdered />
             <span>Orders</span>
           </NavLink>
+        </li>
+        <li
+          className={`${!open.show6 ? "hover:bg-gray-200 rounded-lg" : null}`}
+        >
+          <button
+            onClick={() => toggle("show6")}
+            className={`"dropbtn flex gap-1.5 py-2 text-left cursor-pointer" ${open.show6 ? "bg-gray-200" : null}`}
+          >
+            <MenuIcon />
+            <span>Menu</span>
+            <ChevronDown
+              className={`justify-self-end-safe transition-transform ${
+                open.show6 ? "rotate-180" : ""
+              }`}
+            />
+          </button>
+          <ul
+            className={`list-none pl-6 overflow-hidden transition-all duration-500 
+             ${open.show6 ? "max-h-40" : "max-h-0"}`}
+          >
+            <li>
+              <NavLink
+                to="/merchant/menu"
+                className={({ isActive }) =>
+                  `block px-2 py-1 rounded-lg transition ${
+                    isActive ? "bg-red-500 text-white" : "hover:bg-gray-200"
+                  }`
+                }
+              >
+                Menu Manager
+              </NavLink>
+            </li>
+          </ul>
         </li>
         <li>
           <NavLink

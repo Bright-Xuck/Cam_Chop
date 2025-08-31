@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { DollarSign } from "lucide-react";
+
 export default function Additem() {
   const [category, setCategory] = useState([]);
   const [tags, setTags] = useState([]);
@@ -37,32 +37,32 @@ export default function Additem() {
   }
 
   return (
-    <div>
-      <form action="" onSubmit={Fetchitem} className="grid grid-cols-2 w-full gap-4">
+    <div className="grid pt-20">
+      <form action="" onSubmit={Fetchitem} className="grid grid-cols-2 w-3/4 m-auto gap-2">
         <div className="grid grid-cols-1 col-span-2 gap-2">
           <label htmlFor="name">Name</label>
-          <input type="text" id="name" name="name" className="border border-neutral-500"/>
+          <input type="text" id="name" name="name" className="border border-neutral-400 rounded-[5px] "/>
         </div>
         <div className="grid grid-cols-1 col-span-2 gap-2">
           <label htmlFor="description">Description</label>
-          <textarea name="description" id="description" className="border border-neutral-500"></textarea>
+          <textarea name="description" id="description" className="border border-neutral-400 rounded-[5px]"></textarea>
         </div>
         <div className="grid grid-cols-1 col-span-2">
           <label htmlFor="Image">Image</label>
-          <input type="file" id="Image" name="Image" className="border border-neutral-500"/>
+          <input type="file" id="Image" name="Image" className="border border-neutral-400 rounded-[5px]"/>
         </div>
          <div className="grid grid-cols-1 grid-rows-2 col-span-2">
             <label htmlFor="price">Price</label>
-            <input type="number" id="price" name="price" className="border border-neutral-500"/>
+            <input type="number" id="price" name="price" className="border border-neutral-400 rounded-[5px] before:content-['XAF']"/>
         </div>
-        <section className="grid grid-cols-1 border border-neutral-500 col-span-2">
+        <section className="grid grid-cols-1 rounded-[5px] col-span-2">
           <label>Category</label>
           <div>
             {category.length < 1 && (
               <>
                 <p>No Category yet</p>
-                <div className="flex">
-                  <p onClick={add}>Add Category</p>{" "}
+                <div className="flex justify-between border border-neutral-400 rounded-[5px]">
+                  <p onClick={add} className="order-2 text-blue-400 cursor-pointer w-1/2 text-center bg-blue-100 rounded-l-2xl hover:bg-blue-700 hover:text-white">Add Category</p>{" "}
                   <input
                     type="text"
                     name="category"
@@ -99,7 +99,7 @@ export default function Additem() {
             )}
           </div>
         </section>
-        <div className="grid grid-cols-1 border border-neutral-500">
+        <div className="grid grid-cols-1 border border-neutral-400 rounded-[5px]">
             <div className="flex">
           <label htmlFor="tags">Tags:</label>
           <div className="flex flex-wrap">
@@ -119,8 +119,8 @@ export default function Additem() {
             </div>
         </div>
         <div className="grid gap-2">
-            <button className="border border-neutral-500 p-3">Cancel</button>
-            <button className="border border-neutral-500 p-3" type="submit">Save</button>
+            <button className="border border-neutral-400 rounded-[5px] p-3">Cancel</button>
+            <button className="border border-neutral-400 rounded-[5px] p-3" type="submit">Save</button>
         </div>
       </form>
     </div>

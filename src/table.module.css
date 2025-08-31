@@ -1,0 +1,14 @@
+@import "tailwindcss";
+@reference "tailwindcss";
+
+th, td{
+    @apply p-3.5;
+}
+td{
+    @apply border-t border-t-neutral-500 overflow-hidden;
+}
+
+tr:hover{
+   @apply bg-neutral-300;
+}
+
