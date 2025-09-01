@@ -4,7 +4,7 @@ import ItemTable from './ItemsTable';
 import Additem from './Additem';
 import { useState } from 'react';
 
-export default function MenuManager() {
+export default function MenuManager({item, Setitem}) {
     return (
         <main className='w-full'>
             {/* Top Header */}
@@ -49,8 +49,8 @@ export default function MenuManager() {
                 </div>
             </div>
             <div className=''>
-                <ItemTable/>
-                <Additem className="" />
+                <ItemTable item={item} Setitem={Setitem}/>
+                <Additem item={item} Setitem={Setitem} />
             </div>
         </main>
     );

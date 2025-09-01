@@ -240,7 +240,7 @@ export default function Sidebar() {
           >
             <li>
               <NavLink
-                to="/merchant/menu"
+                to="/merchant/Menumanager"
                 className={({ isActive }) =>
                   `block px-2 py-1 rounded-lg transition ${
                     isActive ? "bg-red-500 text-white" : "hover:bg-gray-200"

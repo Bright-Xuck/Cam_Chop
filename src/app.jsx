@@ -6,20 +6,20 @@ import Signup from "./pages/Signup";
 import LoginPage from "./pages/Login";
 import Merchant from "./pages/merchantdashboard";
 import { useState } from "react";
-import Nav from "./Components/nav";
 import Merchantlayout from "./Components/merchantLayout";
 import Customerlayout from "./Components/customerlayout";
-import Additem from "./Components/Additem";
 import SignupMerchant from "./Components/SignupMerchant";
 import LoginMerchant from "./Components/LoginMerchant";
 import {merchants} from "./data/merchants";
 import MenuManager from "./Components/MenuManager";
 import AddMenu from "./Components/AddMenu";
+import { products } from "./data/productdata";
 
 
 export default function App() {
   const [userDatabase, setUserDatabase] = useState([]);
   const [merchantDatabase, setMerchantDatabase] = useState(merchants)
+  const [item, Setitem] = useState(products)
 
   return (
     <HashRouter>
@@ -68,14 +68,6 @@ export default function App() {
           }
         />
         <Route
-          path="/merchant/menu"
-          element={
-            <Merchantlayout>
-              <MenuManager />
-            </Merchantlayout>
-          }
-        />
-        <Route
           path="/merchant/signup"
           element={
            <SignupMerchant
@@ -95,10 +87,10 @@ export default function App() {
         />
         
         <Route
-          path="/merchant/addmenu"
+          path="/merchant/Menumanager"
           element={
             <Merchantlayout>
-              <AddMenu/>
+              <MenuManager item={item} Setitem={Setitem}/>
             </Merchantlayout>
           }
         />
