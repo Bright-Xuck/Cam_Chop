@@ -1,11 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect, forwardRef } from "react";
 import { useMerchant } from "../context/MerchantProvider";
 
-export default function Additem({ item, Setitem }) {
+const Additem = forwardRef(function Additem({ item, Setitem, edititem, menuid, onCancel }, ref) {
   const [tags, setTags] = useState([]);
   const { currentUser } = useMerchant();
   const merchantId = currentUser.merchantId;
-  
+
+  useEffect(() => {
+    if (edititem) {
+      document.getElementById("name").value = edititem.name;
+      document.getElementById("description").value = edititem.description;
+      document.getElementById("price").value = edititem.price;
+      document.getElementById("category").value = edititem.category;
+      document.getElementById("status").value = edititem.status;
+      setTags(edititem.tags || []);
+    }
+  }, [edititem]);
 
   function addTag() {
     const newTag = document.querySelector("input[id=tag]");
@@ -20,20 +30,42 @@ export default function Additem({ item, Setitem }) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    const finaldata = { ...data, tags, id:item.length+1, merchantId:merchantId};
-    Setitem([...item, finaldata]);
+    const imageFile = formData.get("image")
+    if (edititem) {
+      const updatedItem = { ...edititem, ...data, image:imageFile ? URL.createObjectURL(imageFile) : edititem.image ,tags };
+      Setitem(item.map((it) => (it.id === edititem.id ? updatedItem : it)));
+      event.target.reset();
+      setTags([]);
+    } 
+    else {
+      const finaldata = {
+        ...data,
+        tags,
+        id: item.length + 1,
+        merchantId: merchantId,
+        menuid: menuid,
+        image: imageFile ? URL.createObjectURL(imageFile) : null,
+      };
+      Setitem([...item, finaldata]);
+    }
+    event.target.reset();
+    setTags([]);
+
     console.log(item);
   }
 
   return (
     <div className="grid pt-20">
       <form
+        ref={ref}
         action=""
         onSubmit={Fetchitem}
         className="grid grid-cols-2 w-3/4 m-auto gap-4 p-6 bg-white rounded-xl shadow-md"
       >
         <div className="grid grid-cols-1 col-span-2 gap-2">
-          <label htmlFor="name" className="font-semibold text-gray-700">Name</label>
+          <label htmlFor="name" className="font-semibold text-gray-700">
+            Name
+          </label>
           <input
             type="text"
             id="name"
@@ -43,7 +75,9 @@ export default function Additem({ item, Setitem }) {
         </div>
 
         <div className="grid grid-cols-1 col-span-2 gap-2">
-          <label htmlFor="description" className="font-semibold text-gray-700">Description</label>
+          <label htmlFor="description" className="font-semibold text-gray-700">
+            Description
+          </label>
           <textarea
             name="description"
             id="description"
@@ -54,11 +88,13 @@ export default function Additem({ item, Setitem }) {
 
         <div className="flex col-span-2 justify-center items-end gap-4">
           <div className="w-1/2">
-            <label htmlFor="Image" className="font-semibold text-gray-700">Image</label>
+            <label htmlFor="Image" className="font-semibold text-gray-700">
+              Image
+            </label>
             <input
               type="file"
-              id="Image"
-              name="Image"
+              id="image"
+              name="image"
               className="border border-neutral-300 rounded-md p-2 w-full"
             />
           </div>
@@ -76,7 +112,9 @@ export default function Additem({ item, Setitem }) {
         </div>
 
         <div className="grid grid-cols-1 grid-rows-2 col-span-2 gap-2">
-          <label htmlFor="price" className="font-semibold text-gray-700">Price XAF:</label>
+          <label htmlFor="price" className="font-semibold text-gray-700">
+            Price XAF:
+          </label>
           <input
             type="number"
             id="price"
@@ -86,16 +124,17 @@ export default function Additem({ item, Setitem }) {
         </div>
 
         <section className="grid grid-cols-1 rounded-md col-span-2 gap-2 border border-neutral-300 p-3">
-  <label htmlFor="category" className="font-semibold text-gray-700">Category</label>
-  <input
-    type="text"
-    id="category"
-    name="category"
-    placeholder="Enter category"
-    className="p-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300"
-  />
-</section>
-
+          <label htmlFor="category" className="font-semibold text-gray-700">
+            Category
+          </label>
+          <input
+            type="text"
+            id="category"
+            name="category"
+            placeholder="Enter category"
+            className="p-2 border border-neutral-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300"
+          />
+        </section>
 
         <div className="grid grid-cols-2 grid-rows-[auto_auto] border border-neutral-300 rounded-md p-2 gap-2 col-span-2 h-auto">
           <div className="flex flex-wrap gap-2">
@@ -110,7 +149,10 @@ export default function Additem({ item, Setitem }) {
               ))}
           </div>
           <div className="grid grid-cols-[auto_auto] items-end gap-2 col-span-2 min-h-15">
-            <p onClick={addTag} className="w-full cursor-pointer text-blue-500 hover:underline">
+            <p
+              onClick={addTag}
+              className="w-full cursor-pointer text-blue-500 hover:underline"
+            >
               Add Tag
             </p>
             <input
@@ -137,4 +179,7 @@ export default function Additem({ item, Setitem }) {
       </form>
     </div>
   );
-}
+})
+export default Additem;
+
+

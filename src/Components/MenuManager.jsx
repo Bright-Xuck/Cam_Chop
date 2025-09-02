@@ -4,10 +4,9 @@ import ItemTable from './ItemsTable';
 import Additem from './Additem';
 import { useState } from 'react';
 
-export default function MenuManager({item, Setitem}) {
+export default function MenuManager({item, Setitem, edititem, setEdititem}) {
     return (
         <main className='w-full'>
-            {/* Top Header */}
             <div className="bg-white border-b border-gray-200 px-6 py-4">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-4">
@@ -29,8 +28,6 @@ export default function MenuManager({item, Setitem}) {
                     </div>
                 </div>
             </div>
-
-            {/* Welcome Section */}
             <div className="bg-gradient-to-br from-red-50 to-orange-50 px-6 py-12">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-3xl font-bold text-gray-900 mb-4">
@@ -49,8 +46,7 @@ export default function MenuManager({item, Setitem}) {
                 </div>
             </div>
             <div className=''>
-                <ItemTable item={item} Setitem={Setitem}/>
-                <Additem item={item} Setitem={Setitem} />
+                <ItemTable item={item} Setitem={Setitem} edititem={edititem} setEdititem={setEdititem}/>
             </div>
         </main>
     );

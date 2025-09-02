@@ -12,7 +12,6 @@ import SignupMerchant from "./Components/SignupMerchant";
 import LoginMerchant from "./Components/LoginMerchant";
 import {merchants} from "./data/merchants";
 import MenuManager from "./Components/MenuManager";
-import AddMenu from "./Components/AddMenu";
 import { products } from "./data/productdata";
 
 
@@ -20,6 +19,7 @@ export default function App() {
   const [userDatabase, setUserDatabase] = useState([]);
   const [merchantDatabase, setMerchantDatabase] = useState(merchants)
   const [item, Setitem] = useState(products)
+  const [edititem, setEdititem] = useState(null)
 
   return (
     <HashRouter>
@@ -90,7 +90,7 @@ export default function App() {
           path="/merchant/Menumanager"
           element={
             <Merchantlayout>
-              <MenuManager item={item} Setitem={Setitem}/>
+              <MenuManager item={item} Setitem={Setitem} edititem={edititem} setEdititem={setEdititem}/>
             </Merchantlayout>
           }
         />
