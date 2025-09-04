@@ -148,7 +148,7 @@ const Additem = forwardRef(function Additem({ item, Setitem, edititem, menuid, o
                 </span>
               ))}
           </div>
-          <div className="grid grid-cols-[auto_auto] items-end gap-2 col-span-2 min-h-15">
+          <div className="grid grid-cols-[auto_auto] items-end gap-2 col-span-2 min-h-10">
             <p
               onClick={addTag}
               className="w-full cursor-pointer text-blue-500 hover:underline"

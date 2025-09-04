@@ -1,6 +1,6 @@
 export const products = [
   {
-    id: 1,
+    id: "1",
     menuid: 3,
     merchantId: "m1", 
     name: "Burger & Fries",
@@ -12,7 +12,7 @@ export const products = [
     status: "Draft"
   },
   {
-    id: 2,
+    id: "2",
     menuid: 3,
     merchantId: "m1",
     name: "Bread & Jam",
@@ -24,7 +24,7 @@ export const products = [
     status: "In Stock"
   },
   {
-    id: 3,
+    id: "3",
     menuid: 3,
     merchantId: "m1",
     name: "Pizza",

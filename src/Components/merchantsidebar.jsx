@@ -4,7 +4,6 @@ import {
   ChevronDown,
   Lightbulb,
   BookAIcon,
-  ListCheck,
   PersonStandingIcon,
   CircleDollarSignIcon,
   ListOrdered,
@@ -45,8 +44,8 @@ export default function Sidebar() {
             to="/merchant"
             end
             className={({ isActive }) =>
-              `flex text-left py-2 rounded-lg transition ${
-                isActive ? "bg-red-500 text-white" : "hover:bg-gray-200"
+              `flex text-left font-semibold py-2 rounded-lg transition ${
+                isActive ? "bg-red-100 text-red-500 border-2 border-red-600" : "hover:bg-gray-200"
               }`
             }
           >
@@ -61,7 +60,7 @@ export default function Sidebar() {
         >
           <button
             onClick={() => toggle("show3")}
-            className="dropbtn flex gap-1.5 text-left cursor-pointer"
+            className="dropbtn flex gap-1.5 text-left font-semibold cursor-pointer"
           >
             <Lightbulb />
             <span>Insights</span>
@@ -72,15 +71,15 @@ export default function Sidebar() {
             />
           </button>
           <ul
-            className={`list-none pl-6 overflow-hidden transition-all duration-500 
+            className={`list-none overflow-hidden transition-all duration-500 
              ${open.show3 ? "max-h-40" : "max-h-0"}`}
           >
             <li>
               <NavLink
                 to="/merchant/create/food"
                 className={({ isActive }) =>
-                  `block px-4 py-2 rounded-lg transition ${
-                    isActive ? "bg-red-500 text-white" : "hover:bg-gray-200"
+                  `block px-4 pl-10 rounded-lg transition ${
+                    isActive ? "bg-red-100 text-red-500 border-2 border-red-600" : "hover:bg-gray-200"
                   }`
                 }
               >
@@ -91,8 +90,8 @@ export default function Sidebar() {
               <NavLink
                 to="/merchant/create/veg"
                 className={({ isActive }) =>
-                  `block px-4 py-2 rounded-lg transition ${
-                    isActive ? "bg-red-500 text-white" : "hover:bg-gray-200"
+                  `block px-4 pl-10 rounded-lg transition ${
+                    isActive ? "bg-red-100 text-red-500 border-2 border-red-600" : "hover:bg-gray-200"
                   }`
                 }
               >
@@ -105,8 +104,8 @@ export default function Sidebar() {
           <NavLink
             to="/merchant/dashboard"
             className={({ isActive }) =>
-              `block py-2 rounded-lg transition ${
-                isActive ? "bg-red-500 text-white" : "hover:bg-gray-200"
+              `block py-2 rounded-lg font-semibold transition ${
+                isActive ? "bg-red-100 text-red-500 border-2 border-red-600" : "hover:bg-gray-200"
               }`
             }
           >
@@ -121,7 +120,7 @@ export default function Sidebar() {
         >
           <button
             onClick={() => toggle("show1")}
-            className="dropbtn flex gap-1.5 text-left cursor-pointer"
+            className="dropbtn flex gap-1.5 text-left font-semibold cursor-pointer"
           >
             <PersonStandingIcon />
             <span>Customers</span>
@@ -132,15 +131,15 @@ export default function Sidebar() {
             />
           </button>
           <ul
-            className={`list-none pl-6 overflow-hidden transition-all duration-500 
+            className={`list-none  overflow-hidden transition-all duration-500 
              ${open.show1 ? "max-h-40" : "max-h-0"}`}
           >
             <li>
               <NavLink
                 to="/merchant/create/food"
                 className={({ isActive }) =>
-                  `block px-4 py-2 rounded-lg transition ${
-                    isActive ? "bg-red-500 text-white" : "hover:bg-gray-200"
+                  `block px-4 pl-10 rounded-lg transition ${
+                    isActive ? "bg-red-100 text-red-500 border-2 border-red-600" : "hover:bg-gray-200"
                   }`
                 }
               >
@@ -151,8 +150,8 @@ export default function Sidebar() {
               <NavLink
                 to="/merchant/create/veg"
                 className={({ isActive }) =>
-                  `block px-4 py-2 rounded-lg transition ${
-                    isActive ? "bg-red-500 text-white" : "hover:bg-gray-200"
+                  `block px-4 pl-10 rounded-lg transition ${
+                    isActive ? "bg-red-100 text-red-500 border-2 border-red-600" : "hover:bg-gray-200"
                   }`
                 }
               >
@@ -166,7 +165,7 @@ export default function Sidebar() {
         >
           <button
             onClick={() => toggle("show2")}
-            className="dropbtn flex gap-1.5 py-1.5 text-left cursor-pointer"
+            className="dropbtn flex gap-1.5 py-1.5 text-left font-semibold cursor-pointer"
           >
             <CircleDollarSignIcon />
             <span>Financials</span>
@@ -177,15 +176,15 @@ export default function Sidebar() {
             />
           </button>
           <ul
-            className={`list-none pl-6 overflow-hidden transition-all duration-500 
+            className={`list-none  overflow-hidden transition-all duration-500 
              ${open.show2 ? "max-h-40" : "max-h-0"}`}
           >
             <li>
               <NavLink
                 to="/merchant/create/food2"
                 className={({ isActive }) =>
-                  `block px-4 py-2 rounded-lg transition ${
-                    isActive ? "bg-red-500 text-white" : "hover:bg-gray-200"
+                  `block px-4 pl-10 rounded-lg transition ${
+                    isActive ? "bg-red-100 text-red-500 border-2 border-red-600" : "hover:bg-gray-200"
                   }`
                 }
               >
@@ -196,8 +195,8 @@ export default function Sidebar() {
               <NavLink
                 to="/merchant/create/veg2"
                 className={({ isActive }) =>
-                  `block px-4 py-2 rounded-lg transition ${
-                    isActive ? "bg-red-500 text-white" : "hover:bg-gray-200"
+                  `block px-4 pl-10 rounded-lg transition ${
+                    isActive ? "bg-red-100 text-red-500 border-2 border-red-600" : "hover:bg-gray-200"
                   }`
                 }
               >
@@ -210,8 +209,8 @@ export default function Sidebar() {
           <NavLink
             to="/merchant/calender"
             className={({ isActive }) =>
-              `flex items-center gap-1.5  rounded-lg transition ${
-                isActive ? "bg-red-500 text-white" : "hover:bg-gray-200"
+              `flex items-center gap-1.5 font-semibold rounded-lg transition ${
+                isActive ? "bg-red-100 text-red-500 border-2 border-red-600" : "hover:bg-gray-200"
               }`
             }
           >
@@ -224,7 +223,7 @@ export default function Sidebar() {
         >
           <button
             onClick={() => toggle("show6")}
-            className={`"dropbtn flex gap-1.5 py-2 text-left cursor-pointer" ${open.show6 ? "bg-gray-200" : null}`}
+            className={`"dropbtn flex gap-1.5 py-2 text-left font-semibold cursor-pointer" ${open.show6 ? "bg-gray-200" : null}`}
           >
             <MenuIcon />
             <span>Menu</span>
@@ -235,15 +234,15 @@ export default function Sidebar() {
             />
           </button>
           <ul
-            className={`list-none pl-6 overflow-hidden transition-all duration-500 
+            className={`list-none  overflow-hidden transition-all duration-500
              ${open.show6 ? "max-h-40" : "max-h-0"}`}
           >
             <li>
               <NavLink
                 to="/merchant/Menumanager"
                 className={({ isActive }) =>
-                  `block px-2 py-1 rounded-lg transition ${
-                    isActive ? "bg-red-500 text-white" : "hover:bg-gray-200"
+                  `block w-full px-2 pl-10 rounded-lg transition ${
+                    isActive ? "bg-red-100 text-red-500 border-2 border-red-600" : "hover:bg-gray-200"
                   }`
                 }
               >
@@ -256,8 +255,8 @@ export default function Sidebar() {
           <NavLink
             to="/merchant/calender"
             className={({ isActive }) =>
-              `flex items-center gap-3.5  rounded-lg transition ${
-                isActive ? "bg-red-500 text-white" : "hover:bg-gray-200"
+              `flex items-center gap-3.5 font-semibold rounded-lg transition ${
+                isActive ? "bg-red-100 text-red-500 border-2 border-red-600" : "hover:bg-gray-200"
               }`
             }
           >
@@ -270,7 +269,7 @@ export default function Sidebar() {
         >
           <button
             onClick={() => toggle("show4")}
-            className="dropbtn flex gap-1.5 py-2 text-left cursor-pointer"
+            className="dropbtn flex gap-1.5 py-2 text-left font-semibold cursor-pointer"
           >
             <Settings />
             <span>Settings</span>
@@ -281,15 +280,15 @@ export default function Sidebar() {
             />
           </button>
           <ul
-            className={`list-none pl-6 overflow-hidden transition-all duration-500 
+            className={`list-none overflow-hidden transition-all duration-500 
              ${open.show4 ? "max-h-40" : "max-h-0"}`}
           >
             <li>
               <NavLink
                 to="/merchant/create/food2"
                 className={({ isActive }) =>
-                  `block px-4 py-2 rounded-lg transition ${
-                    isActive ? "bg-red-500 text-white" : "hover:bg-gray-200"
+                  `block pl-10 rounded-lg transition ${
+                    isActive ? "bg-red-100 text-red-500 border-2 border-red-600" : "hover:bg-gray-200"
                   }`
                 }
               >
@@ -300,8 +299,8 @@ export default function Sidebar() {
               <NavLink
                 to="/merchant/create/veg2"
                 className={({ isActive }) =>
-                  `block px-4 py-2 rounded-lg transition ${
-                    isActive ? "bg-red-500 text-white" : "hover:bg-gray-200"
+                  `block px-4 pl-10 rounded-lg transition ${
+                    isActive ? "bg-red-100 text-red-500 border-2 border-red-600" : "hover:bg-gray-200"
                   }`
                 }
               >
@@ -316,8 +315,8 @@ export default function Sidebar() {
           <NavLink
             to="/merchant/calender"
             className={({ isActive }) =>
-              `flex items-center gap-3.5  rounded-lg transition ${
-                isActive ? "bg-red-500 text-white" : "hover:bg-gray-200"
+              `flex items-center gap-3.5 font-semibold rounded-lg transition ${
+                isActive ? "bg-red-100 text-red-500 border-2 border-red-600" : "hover:bg-gray-200"
               }`
             }
           >
@@ -330,7 +329,7 @@ export default function Sidebar() {
         >
           <button
             onClick={() => toggle("show5")}
-            className="dropbtn flex gap-1.5 py-2 text-left cursor-pointer"
+            className="dropbtn flex gap-1.5 py-2 text-left font-semibold cursor-pointer"
           >
             <User2Icon />
             <span>Current Logged </span>
@@ -341,15 +340,15 @@ export default function Sidebar() {
             />
           </button>
           <ul
-            className={`list-none pl-6 overflow-hidden transition-all duration-500 
+            className={`list-none overflow-hidden transition-all duration-500 
              ${open.show5 ? "max-h-40" : "max-h-0"}`}
           >
             <li>
               <NavLink
                 to="/merchant/create/food2"
                 className={({ isActive }) =>
-                  `block px-4 py-2 rounded-lg transition ${
-                    isActive ? "bg-red-500 text-white" : "hover:bg-gray-200"
+                  `block px-4 pl-10 rounded-lg transition ${
+                    isActive ? "bg-red-100 text-red-500 border-2 border-red-600" : "hover:bg-gray-200"
                   }`
                 }
               >
@@ -360,8 +359,8 @@ export default function Sidebar() {
               <NavLink
                 to="/merchant/create/veg2"
                 className={({ isActive }) =>
-                  `block px-4 py-2 rounded-lg transition ${
-                    isActive ? "bg-red-500 text-white" : "hover:bg-gray-200"
+                  `block px-4 pl-10 rounded-lg transition ${
+                    isActive ? "bg-red-100 text-red-500 border-2 border-red-600" : "hover:bg-gray-200"
                   }`
                 }
               >

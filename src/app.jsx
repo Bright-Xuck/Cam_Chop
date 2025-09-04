@@ -13,6 +13,7 @@ import LoginMerchant from "./Components/LoginMerchant";
 import {merchants} from "./data/merchants";
 import MenuManager from "./Components/MenuManager";
 import { products } from "./data/productdata";
+import MerchantStore from "./Components/Merchantstore";
 
 
 export default function App() {
@@ -60,6 +61,12 @@ export default function App() {
           }
         />
         <Route
+          path="/merchantstore"
+          element={
+            <MerchantStore/>
+          }
+        />
+        <Route
           path="/merchant"
           element={
             <Merchantlayout>
@@ -74,6 +81,12 @@ export default function App() {
             merchantDatabase={merchantDatabase}
             setMerchantDatabase={setMerchantDatabase}
            />
+          }
+        />
+        <Route
+          path="/merchantstore/item/:id"
+          element={
+           <MerchantStore />
           }
         />
         

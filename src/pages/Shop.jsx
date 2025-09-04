@@ -19,6 +19,7 @@ export default function Shop() {
     }));
   }
 
+
   return (
     <main>
       <section className="pb-10">
