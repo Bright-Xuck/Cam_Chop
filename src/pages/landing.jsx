@@ -1,5 +1,4 @@
-import { Link } from "react-router";
-import Nav from "../Components/nav";
+import { NavLink } from "react-router";
 
 export default function Landing() {
   return (
@@ -25,7 +24,7 @@ export default function Landing() {
               Attract new custmers and grow sales, starting with 0% commissions
               for up to 30 days.
             </p>
-            <p className="after:content-['→'] mt-5 text-red-600 text-2xl font-semibold max-sm:text-xl max-sm:mt-1.5">Sign up for Cam Chop</p>
+            <NavLink to={"/merchant/signup"} className="after:content-['→'] mt-5 text-red-600 text-2xl font-semibold max-sm:text-xl max-sm:mt-1.5">Sign up for Cam Chop</NavLink>
             </div>
           </div>
         </section>
@@ -38,7 +37,7 @@ export default function Landing() {
             <h1 className="text-5xl font-semibold">Everthing you crave, delivered.</h1>
            <h4 className="text-2xl font-semibold mt-3">Your favorite local restaurants</h4>
            <p className="text-xl mt-1 mb-3">Get a slice of pizza or the whole pie delivered, or pick up that burger for the road you've been meaning to try </p>
-           <button className="bg-red-500 p-3 rounded-4xl">Find restaurants</button>
+           <NavLink to={"/shop"} className="bg-red-500 p-3 rounded-4xl">Find restaurants</NavLink>
            </div>
     </div>
     <div className=" bg-pink-200 pt-20 pb-10">
@@ -49,7 +48,7 @@ export default function Landing() {
           <div className="col-span-2"> 
             <h1 className="text-5xl font-semibold">Cam Chop is delivery for less.</h1>
            <p className="text-xl mt-3 mb-3">Members get a XAF0 delivery fee on CamChop-Free orders, 5% back on pickup orders, and so much more </p>
-           <button className="bg-red-500 p-3 rounded-4xl">Get CamChop-Free</button>
+           <NavLink to={"/signup"} className="bg-red-500 p-3 rounded-4xl">Get CamChop-Free</NavLink>
            </div>
     </div>
     </div>
@@ -93,7 +92,7 @@ export default function Landing() {
        <div className="col-span-2"> 
         <h1 className="text-5xl font-semibold">Grow your business with CamChop</h1>
         <p className="text-xl mt-3 mb-3">Businesses large and small partner with DoorDash to reach new customers, increase order volume, and drive more sales.</p>
-        <button className="bg-red-500 p-3 rounded-4xl">Become a Partner</button>
+        <NavLink to={"/merchant/signup"} className="bg-red-500 p-3 rounded-4xl">Become a Partner</NavLink>
         </div>
     </div>
    </section>

@@ -6,16 +6,22 @@ import Signup from "./pages/Signup";
 import LoginPage from "./pages/Login";
 import Merchant from "./pages/merchantdashboard";
 import { useState } from "react";
-import Nav from "./Components/nav";
 import Merchantlayout from "./Components/merchantLayout";
 import Customerlayout from "./Components/customerlayout";
-import Additem from "./Components/Additem";
 import SignupMerchant from "./Components/SignupMerchant";
 import LoginMerchant from "./Components/LoginMerchant";
+import {merchants} from "./data/merchants";
+import MenuManager from "./Components/MenuManager";
+import { products } from "./data/productdata";
+import MerchantStore from "./Components/Merchantstore";
+import ProductInfo from "./Components/ProductInfo";
+
 
 export default function App() {
   const [userDatabase, setUserDatabase] = useState([]);
-  const [merchantDatabase, setMerchantDatabase] = useState([])
+  const [merchantDatabase, setMerchantDatabase] = useState(merchants)
+  const [item, Setitem] = useState(products)
+  const [edititem, setEdititem] = useState(null)
 
   return (
     <HashRouter>
@@ -56,18 +62,16 @@ export default function App() {
           }
         />
         <Route
+          path="/merchantstore"
+          element={
+            <MerchantStore/>
+          }
+        />
+        <Route
           path="/merchant"
           element={
             <Merchantlayout>
               <Merchant />
-            </Merchantlayout>
-          }
-        />
-        <Route
-          path="/merchant/Additem"
-          element={
-            <Merchantlayout>
-              <Additem />
             </Merchantlayout>
           }
         />
@@ -81,11 +85,34 @@ export default function App() {
           }
         />
         <Route
+          path="/merchantstore/item/:id"
+          element={
+           <MerchantStore />
+          }
+        />
+
+        <Route
+          path="/merchantstore/item/:id/:name"
+          element={
+           <ProductInfo />
+          }
+        />
+        
+        <Route
           path="/merchant/login"
           element={
             <LoginMerchant 
              merchantDatabase={merchantDatabase}
              />
+          }
+        />
+        
+        <Route
+          path="/merchant/Menumanager"
+          element={
+            <Merchantlayout>
+              <MenuManager item={item} Setitem={Setitem} edititem={edititem} setEdititem={setEdititem}/>
+            </Merchantlayout>
           }
         />
       </Routes>
