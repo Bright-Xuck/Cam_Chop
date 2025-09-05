@@ -1,4 +1,4 @@
-import { Bell, MapPin, Menu, ShoppingCart, Star } from "lucide-react";
+import {MapPin, Star } from "lucide-react";
 import { products } from "../data/productdata";
 import { useParams } from "react-router";
 import { merchants } from "../data/merchants";
@@ -6,6 +6,7 @@ import { Menus } from "../data/menu";
 import { HashLink } from "react-router-hash-link";
 import { useState, useEffect } from "react";
 import Footer from "./footer";
+import StoreNav from "./StoreNav";
 
 export default function MerchantStore() {
   const params = useParams();
@@ -62,25 +63,7 @@ export default function MerchantStore() {
   return (
     <>
       {/* NAVBAR */}
-      <nav className="grid grid-cols-3 h-16 border-b border-b-neutral-200 px-4 fixed top-0 w-full bg-white z-50">
-        <div className="flex items-center gap-6">
-          <Menu className="w-6 h-6 cursor-pointer" />
-          <div className="flex items-center gap-2">
-            <img src="photos/logo.png" alt="logo" className="h-12" />
-            <h1 className="font-bold text-lg">CamChop</h1>
-          </div>
-        </div>
-        <div className="col-start-3 flex items-center justify-end gap-4">
-          <Bell className="p-1 bg-neutral-200 rounded-full w-8 h-8 hover:bg-neutral-300 cursor-pointer" />
-          <ShoppingCart className="p-1 bg-red-500 text-white rounded-full w-8 h-8 hover:bg-red-600 cursor-pointer" />
-          <p className="font-medium px-3 py-1 rounded-lg hover:bg-neutral-200 cursor-pointer">
-            Sign In
-          </p>
-          <p className="bg-neutral-600 text-white px-3 py-1 rounded-lg font-medium cursor-pointer hover:bg-neutral-700">
-            Sign Up
-          </p>
-        </div>
-      </nav>
+      <StoreNav/>
 
       <main className="flex mt-16">
         {/* LEFT SIDEBAR placeholder (just for layout balance) */}
@@ -203,20 +186,28 @@ export default function MerchantStore() {
               {/* Featured items */}
               <section id="features">
                 <h1 className="mt-10 mb-4 text-xl font-bold">Featured Items</h1>
-                <div className="flex flex-wrap gap-6">
+                <div className="flex flex-wrap gap-6 ">
                   {merchantProducts.map((each) => (
-                    <div key={each.id} className="w-[160px]">
+                    <HashLink key={each.id} to={`/merchantstore/item/${each.id}/${each.name}`}>
+                    <div key={each.id} className="w-[160px] relative hover:bg-neutral-200">
                       <img
                         src={each.image}
                         alt={each.name}
-                        className="w-full h-[130px] object-cover rounded-2xl mb-2"
+                        className="w-full h-[130px] object-cover rounded-2xl mb-2 transition duration-300 hover:brightness-20"
                       />
+                      <div>
                       <h1 className="text-lg font-semibold">{each.name}</h1>
                       <p className="text-sm text-neutral-700">
                         XAF {each.price}
                       </p>
                       <p className="text-xs text-neutral-500">{each.short}</p>
+                      </div>
+                      <div className="opacity-0 flex flex-col items-center justify-center gap-4 h-4/5 w-1/1 absolute top-0 transition duration-500 hover:opacity-100 ">
+                        <button className="bg-gray-200 min-w-22 opacity-80 hover:bg-gray-300 hover:cursor-pointer">View</button>
+                        <button className="bg-blue-500 max-w-22 hover:bg-blue-700 hover:cursor-pointer">Add to Cart</button>
+                      </div>
                     </div>
+                    </HashLink>
                   ))}
                 </div>
               </section>

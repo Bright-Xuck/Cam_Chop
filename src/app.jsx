@@ -14,6 +14,7 @@ import {merchants} from "./data/merchants";
 import MenuManager from "./Components/MenuManager";
 import { products } from "./data/productdata";
 import MerchantStore from "./Components/Merchantstore";
+import ProductInfo from "./Components/ProductInfo";
 
 
 export default function App() {
@@ -87,6 +88,13 @@ export default function App() {
           path="/merchantstore/item/:id"
           element={
            <MerchantStore />
+          }
+        />
+
+        <Route
+          path="/merchantstore/item/:id/:name"
+          element={
+           <ProductInfo />
           }
         />
         
