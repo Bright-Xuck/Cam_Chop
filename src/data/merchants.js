@@ -10,7 +10,7 @@ export const merchants = [
     description: "Authentic African grill house serving suya, roasted fish, and traditional dishes.",
 
     logo: "/images/xucks-logo.png",
-    banner: "/images/xucks-banner.jpg",
+    banner: "photos/merchantlogo1.jpg",
     rating: 4.7,
     reviews: [
       {
@@ -57,7 +57,7 @@ export const merchants = [
     description: "Home-style Cameroonian dishes with fresh local ingredients.",
 
     logo: "/images/mama-sarah-logo.png",
-    banner: "/images/mama-sarah-banner.jpg",
+    banner: "photos/merchantlogo2.jpeg",
 
     rating: 4.5,
     reviews: [

@@ -12,7 +12,7 @@ export const Menus = [
 {
   menuid: 1,                 
   merchantId: "m2",            
-  name: "Lunch",
+  name: "British Lunch",
   picture: "uploads/breakfast.jpg", 
   shortDescription: "Quick morning meals with coffee", 
   openingTime: "08:00",  
@@ -22,7 +22,7 @@ export const Menus = [
 {
   menuid:  2,                 
   merchantId: "m2",            
-  name: "Dinner",
+  name: "American Dinner",
   picture: "uploads/breakfast.jpg", 
   shortDescription: "Quick morning meals with coffee", 
   openingTime: "08:00",  
