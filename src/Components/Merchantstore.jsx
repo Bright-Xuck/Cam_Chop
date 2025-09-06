@@ -7,12 +7,14 @@ import { HashLink } from "react-router-hash-link";
 import { useState, useEffect } from "react";
 import Footer from "./footer";
 import StoreNav from "./StoreNav";
+import { useCart } from "../context/CartStore";
 
 export default function MerchantStore() {
   const params = useParams();
   const { id } = params;
   const product = products.find((product) => product.id == id);
   const [activesection, setactivesection] = useState("features");
+  const {addToCart} = useCart()
 
   const merchantProducts = products.filter(
     (products) => products.merchantId == product.merchantId
@@ -23,6 +25,10 @@ export default function MerchantStore() {
   const menu = Menus.filter(
     (allmenu) => allmenu.merchantId == product.merchantId
   );
+
+  const handleAddToCart = (item) => {
+    addToCart(item, 1); // Add 1 quantity of the item
+  };
 
   const date = new Date();
   const days = [
@@ -38,7 +44,7 @@ export default function MerchantStore() {
   const hours = store.hours[today];
 
   useEffect(() => {
-    const sections = document.querySelectorAll("section[id], article[id]"); // all sections with an ID
+    const sections = document.querySelectorAll("section[id], article[id]"); 
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -50,8 +56,8 @@ export default function MerchantStore() {
       },
       {
         root: null,
-        rootMargin: "-180px 0px 0px 0px", // adjust for fixed navbar/banner height
-        threshold: 0.60, // trigger when 25% of the section is visible
+        rootMargin: "-180px 0px 0px 0px", 
+        threshold: 0.60, 
       }
     );
 
@@ -186,25 +192,29 @@ export default function MerchantStore() {
               {/* Featured items */}
               <section id="features">
                 <h1 className="mt-10 mb-4 text-xl font-bold">Featured Items</h1>
-                <div className="flex flex-wrap gap-6 ">
+                <div className="flex flex-wrap gap-6">
                   {merchantProducts.map((each) => (
                     <HashLink key={each.id} to={`/merchantstore/item/${each.id}/${each.name}`}>
-                    <div key={each.id} className="w-[160px] relative hover:bg-neutral-200">
+                    <div key={each.id} className="flex flex-col w-[160px] h-1/1 relative hover:bg-neutral-200">
                       <img
                         src={each.image}
                         alt={each.name}
-                        className="w-full h-[130px] object-cover rounded-2xl mb-2 transition duration-300 hover:brightness-20"
+                        className="w-full h-[130px] object-cover rounded-2xl mb-2 transition duration-300 hover:brightness-20  shrink-0a"
                       />
-                      <div>
+                      <div className="flex flex-col h-full justify-between">
                       <h1 className="text-lg font-semibold">{each.name}</h1>
+                      <div className="flex justify-between items-end">
                       <p className="text-sm text-neutral-700">
                         XAF {each.price}
                       </p>
-                      <p className="text-xs text-neutral-500">{each.short}</p>
+                      <button className="bg-red-500 px-1 rounded-2xl shadow-md shadow-black hover:bg-red-700" onClick={(e) =>{
+                        e.preventDefault();
+                        handleAddToCart(each)}}>Add to Cart</button>
+                      </div>
+                      {/* <p className="text-xs text-neutral-500">{each.description}</p> */}
                       </div>
                       <div className="opacity-0 flex flex-col items-center justify-center gap-4 h-4/5 w-1/1 absolute top-0 transition duration-500 hover:opacity-100 ">
                         <button className="bg-gray-200 min-w-22 opacity-80 hover:bg-gray-300 hover:cursor-pointer">View</button>
-                        <button className="bg-blue-500 max-w-22 hover:bg-blue-700 hover:cursor-pointer">Add to Cart</button>
                       </div>
                     </div>
                     </HashLink>

@@ -1,7 +1,6 @@
 import { Link, useNavigate } from "react-router";
 import { useMerchant } from "../context/MerchantProvider";
 import toast, { Toaster } from "react-hot-toast";
-import { useEffect } from "react";
 export default function LoginMerchant({merchantDatabase}) {
  
   const navigate = useNavigate();

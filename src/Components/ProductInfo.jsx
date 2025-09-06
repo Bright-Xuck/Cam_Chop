@@ -3,21 +3,29 @@ import { products } from "../data/productdata";
 import { merchants } from "../data/merchants";
 import { Menus } from "../data/menu";
 import StoreNav from "./StoreNav";
-import { useState } from "react";
+import { useState} from "react";
+import { useCart } from "../context/CartStore";
 
 export default function ProductInfo() {
   const params = useParams();
   const { id, name } = params;
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(1);
+  const { addToCart } = useCart();
 
-  function Subtract(event){
-    if(count > 0){
-    setCount(prev => prev-1)
+  function Subtract(event) {
+    if (count > 1) {
+      setCount((prev) => prev - 1);
     }
   }
-  function Add(){
-    setCount(prev => prev+1)
+
+  function Add() {
+    setCount((prev) => prev + 1);
   }
+  function handleAddToCart() {
+    addToCart(product, count);
+    setCount(1); // Reset count after adding to cart
+  }
+ 
 
   const product = products.find((product) => product.id == id);
   const merchant = merchants.find(
@@ -46,12 +54,17 @@ export default function ProductInfo() {
             <div>Product Gallery</div>
           </div>
 
-
           <div className="flex flex-col gap-6">
-            <h1 className="text-left text-3xl font-bold text-red-500">{product.name}</h1>
+            <h1 className="text-left text-3xl font-bold text-red-500">
+              {product.name}
+            </h1>
             <article>
-              <h3 className="text-center  text-xl underline mb-2">Description</h3>
-              <p className="text-2xl text-neutral-700 ">{product.description}</p>
+              <h3 className="text-center  text-xl underline mb-2">
+                Description
+              </h3>
+              <p className="text-2xl text-neutral-700 ">
+                {product.description}
+              </p>
             </article>
             <h3 className="text-2xl font-semibold text-black">
               XAF {product.price}
@@ -61,26 +74,56 @@ export default function ProductInfo() {
               <span className="text-blue-800">{product.category}</span>
             </h3>
             <div className="flex">
-              <h3>Tags:{" "} </h3>
+              <h3>Tags: </h3>
               <div className="flex text-red-600">
                 {product.tags.map((tag) => {
-                  return ( tag+", ");
+                  return tag + ", ";
                 })}
               </div>
             </div>
-            <h4 className={`max-w-30 w-fit text-center p-2 rounded-xl text-white ${product.status == "Draft" ? "bg-red-600" : "bg-green-600"}`}>
+            <h4
+              className={`max-w-30 w-fit text-center p-2 rounded-xl text-white ${
+                product.status == "Draft" ? "bg-red-600" : "bg-green-600"
+              }`}
+            >
               {product.status == "Draft" ? "Out of Stuck" : product.status}
             </h4>
             <div className="flex">
-                <div className="grid grid-cols-4 w-40 h-10 border justify-center divide-x-1">
-            <button onClick={Subtract} className={`${count == 0 ? "hover:cursor-not-allowed": "hover:cursor-pointer"}`}><span className={`${count == 0 ? "opacity-30" : "opacity-100" }`}>-</span></button>
-            <span className="col-span-2 justify-center flex items-center">{count}</span>
-            <button onClick={Add} className="hover:bg-neutral-300 hover:cursor-pointer">+</button>
+              <div className="grid grid-cols-4 w-40 h-10 border justify-center divide-x-1">
+                <button
+                  onClick={Subtract}
+                  className={`${
+                    count == 1
+                      ? "hover:cursor-not-allowed"
+                      : "hover:cursor-pointer"
+                  }`}
+                >
+                  <span
+                    className={`${count == 1 ? "opacity-30" : "opacity-100"}`}
+                  >
+                    -
+                  </span>
+                </button>
+                <span className="col-span-2 justify-center flex items-center">
+                  {count}
+                </span>
+                <button
+                  onClick={Add}
+                  className="hover:bg-neutral-300 hover:cursor-pointer"
+                >
+                  +
+                </button>
+              </div>
+              <div>
+                <button
+                  className="h-10 bg-red-500 text-white px-6 rounded hover:bg-red-600 transition-colors font-medium"
+                  onClick={handleAddToCart}
+                  disabled={product.status === "Draft"}
+                >
+                  Add to Cart
+                </button>{" "}
+              </div>
             </div>
-            <div>
-                <button className="h-10 bg-red-500 px-3 ml-10 hover:bg-red-800">Add to Cart</button>
-            </div>
-          </div>
           </div>
         </section>
       </main>
