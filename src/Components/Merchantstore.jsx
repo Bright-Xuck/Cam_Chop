@@ -199,7 +199,7 @@ export default function MerchantStore() {
                       <img
                         src={each.image}
                         alt={each.name}
-                        className="w-full h-[130px] object-cover rounded-2xl mb-2 transition duration-300 hover:brightness-20  shrink-0a"
+                        className="w-full min-h-[130px] object-cover rounded-2xl mb-2 transition duration-300 hover:brightness-20  shrink-0a"
                       />
                       <div className="flex flex-col h-full justify-between">
                       <h1 className="text-lg font-semibold">{each.name}</h1>

@@ -14,7 +14,7 @@ export default function CartStore({ children }) {
       if (existingItem) {
         // If item exists, update its quantity
         return prevCart.map(item =>
-          item.id === product.id
+          item.id == product.id
             ? { ...item, quantity: item.quantity + quantity }
             : item
         );
