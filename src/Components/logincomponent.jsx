@@ -1,29 +1,36 @@
+import { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router";
 export default function Logincomponent(prop){
+
+    const Navigate = useNavigate()
    
 function handleLogin(event){
     event.preventDefault()
     const formData = new FormData(event.target);
     const email = formData.get("login")
     const password = formData.get("password");
-    console.log(password)
 
     if(email === "" || password === ""){
-        alert("Please fill in all fields");
+        toast.error("Please fill in all fields");
     }
-    else try{
-        console.log(prop.data)
-        const check = prop.data.map(each =>{
-            each.email === email && each.password === password ? console.log("logined!!") : null
-        })
+    else {
+        const check = prop.data.find(each => each.email == email && each.password == password )
+        if(check){
+                toast.success("Login Successful")
+                setTimeout(() =>
+                Navigate("/shop"), 2000)
+            }
+            else{
+                toast.error("Incorrect Email or Password")
+                event.target.reset()
+            }
+        }
     }
-    catch(err){
-        console.error(err)
-    }
-    
-}
 
     return(
         <form onSubmit={handleLogin}>
+            <Toaster/>
             <div>
             <label htmlFor="email">email</label>
             <input type="email" id="email" name="login"/>

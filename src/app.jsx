@@ -15,10 +15,11 @@ import MenuManager from "./Components/MenuManager";
 import { products } from "./data/productdata";
 import MerchantStore from "./Components/Merchantstore";
 import ProductInfo from "./Components/ProductInfo";
+import { Users } from "./data/users";
 
 
 export default function App() {
-  const [userDatabase, setUserDatabase] = useState([]);
+  const [userDatabase, setUserDatabase] = useState(Users);
   const [merchantDatabase, setMerchantDatabase] = useState(merchants)
   const [item, Setitem] = useState(products)
   const [edititem, setEdititem] = useState(null)

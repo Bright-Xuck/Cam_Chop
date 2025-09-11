@@ -8,12 +8,12 @@ export default function SignupMerchant({merchantDatabase, setMerchantDatabase}){
         const data = new FormData(event.target)
         const merchantdata = Object.fromEntries(data.entries())
 
-        const newMerchant ={
-            id: merchantDatabase.length + 1,
+        const newMerchant = {
+            merchantId:`m${merchantDatabase.length + 1}`,
             ...merchantdata
         }
         setMerchantDatabase([...merchantDatabase, newMerchant])
-        naviagte("/merchant/login")
+        setTimeout(()=>{naviagte("/merchant/login")}, 1500)   
     }
 
     useEffect(() =>{console.log(merchantDatabase)}, [merchantDatabase])
