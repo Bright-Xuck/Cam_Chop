@@ -9,7 +9,7 @@ export default function FoodCard(props) {
             <img
               src={props.image}
               alt="food"
-              className="w-full h-[250px] rounded-3xl"
+              className="w-full h-[250px] rounded-3xl max-md:h-[190px]"
             />
           }
         </div>
