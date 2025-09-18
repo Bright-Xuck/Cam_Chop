@@ -28,8 +28,8 @@ export default function Footer(){
             <Link>Get CamChop for Business</Link>
         </div>
         <div className="col-span-2 grid grid-cols-[auto_auto] justify-center gap-1 max-[780px]:grid-cols-1 max-[780px]:col-span-1 ">
-            <img src="photos/appstore.png" alt="" className="max-w-[144px] justify-self-center"/>
-            <img src="photos/playstore.png" alt="" className="max-w-[144px] justify-self-center" />
+            <img src="/photos/appstore.png" alt="" className="max-w-[144px] justify-self-center"/>
+            <img src="/photos/playstore.png" alt="" className="max-w-[144px] justify-self-center" />
         </div>
         </div>
       </section>

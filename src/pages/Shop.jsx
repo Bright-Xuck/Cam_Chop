@@ -45,7 +45,7 @@ export default function Shop() {
           </div>
           <div className="z-9 max-md:order-1">
             <img
-              src="photos/multicuisinea.jpg"
+              src="/photos/multicuisinea.jpg"
               alt=""
               className="relative -left-13 rounded-4xl w-[100%] min-h-[318px] h-full max-md:left-0"
             />

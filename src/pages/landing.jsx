@@ -47,7 +47,7 @@ export default function Landing() {
           {/* Become a Dasher */}
           <div className="flex flex-col md:flex-row lg:flex-col items-center text-center md:text-left lg:text-center gap-6 md:gap-8 lg:gap-6 w-full lg:w-auto">
             <img
-              src="../photos/ScootScoot.svg"
+              src="/photos/ScootScoot.svg"
               alt="Delivery scooter"
               className="h-32 w-32 md:h-48 md:w-48 lg:h-60 lg:w-auto object-contain"
             />
@@ -67,7 +67,7 @@ export default function Landing() {
           {/* Become a Merchant */}
           <div className="flex flex-col md:flex-row lg:flex-col items-center text-center md:text-left lg:text-center gap-6 md:gap-8 lg:gap-6 w-full lg:w-auto">
             <img
-              src="../photos/Storefront.svg"
+              src="/photos/Storefront.svg"
               alt="Storefront"
               className="h-32 w-32 md:h-48 md:w-48 lg:h-60 lg:w-auto object-contain"
             />
@@ -94,7 +94,7 @@ export default function Landing() {
             <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
               <div className="w-full lg:w-3/5 order-2 lg:order-2">
                 <img
-                  src="../photos/download_the_app_mobile.avif"
+                  src="/photos/download_the_app_mobile.avif"
                   alt="Food delivery app"
                   className="w-full h-auto object-cover rounded-lg"
                 />
@@ -126,7 +126,7 @@ export default function Landing() {
             <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
               <div className="w-full lg:w-3/5">
                 <img
-                  src="../photos/dashpass_mobile.avif"
+                  src="/photos/dashpass_mobile.avif"
                   alt="CamChop Free benefits"
                   className="w-full h-auto object-cover rounded-lg"
                 />
@@ -150,7 +150,7 @@ export default function Landing() {
         </section>
 
         {/* Grocery Section */}
-        <article className="relative bg-[url(../photos/convenience_mobile.avif)] bg-no-repeat bg-cover bg-center h-[70vh] md:h-[80vh] lg:h-[90vh] flex justify-center items-center">
+  <article className="relative bg-[url(/photos/convenience_mobile.avif)] bg-no-repeat bg-cover bg-center h-[70vh] md:h-[80vh] lg:h-[90vh] flex justify-center items-center">
           <div className="absolute inset-0 bg-black bg-opacity-40"></div>
           <div className="relative z-10 flex justify-center items-center flex-col w-[90%] md:w-3/5 lg:w-2/5 text-center gap-4 md:gap-6 text-white px-4">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-serif font-extrabold leading-tight">
@@ -174,7 +174,7 @@ export default function Landing() {
             <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
               <div className="w-full lg:w-3/5 order-2 lg:order-2">
                 <img
-                  src="../photos/convenience_mobile.avif"
+                  src="/photos/convenience_mobile.avif"
                   alt="Convenience store delivery"
                   className="w-full h-auto object-cover rounded-lg"
                 />
@@ -206,7 +206,7 @@ export default function Landing() {
             <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16 mb-16 lg:mb-20">
               <div className="w-full lg:w-3/5 order-2 lg:order-2">
                 <img
-                  src="../photos/become_a_dasher_mobile.avif"
+                  src="/photos/become_a_dasher_mobile.avif"
                   alt="Become a Dasher"
                   className="w-full h-auto object-cover rounded-lg"
                 />
@@ -228,7 +228,7 @@ export default function Landing() {
             <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-16">
               <div className="w-full lg:w-3/5">
                 <img
-                  src="../photos/work_with_doordash_mobile.avif"
+                  src="/photos/work_with_doordash_mobile.avif"
                   alt="Business partnership"
                   className="w-full h-auto object-cover rounded-lg"
                 />
