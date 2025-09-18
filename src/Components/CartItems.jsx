@@ -5,7 +5,7 @@ export default function CartItems({ openCart, setOpenCart }) {
 
   return (
     <main
-      className={`fixed right-0 top-16 h-[calc(100vh-4rem)] bg-neutral-600 w-full sm:w-[400px] transform transition-transform duration-300 ease-in-out
+      className={`fixed right-0 top-16 h-[calc(100vh-4rem)] bg-neutral-600 w-full sm:w-[400px] transform transition-transform duration-300 ease-in-out z-50
         ${openCart ? "translate-x-0" : "translate-x-full"}`}
     >
       <div className="h-full flex flex-col">

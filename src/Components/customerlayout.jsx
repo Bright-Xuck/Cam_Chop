@@ -7,7 +7,7 @@ export default function Customerlayout({ children }) {
       <div className="">
         <Nav />
       </div>
-      <div className=" mt-[5.5rem]">{children}</div>
+      <div className=" mt-[5rem]">{children}</div>
       <div>
         <Footer />
       </div>

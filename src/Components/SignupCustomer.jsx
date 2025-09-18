@@ -1,3 +1,4 @@
+import toast,{Toaster} from "react-hot-toast";
 import { useNavigate } from "react-router";
 
 export default function SignupCustomer({ userDatabase, setUserDatabase }) {
@@ -7,14 +8,24 @@ export default function SignupCustomer({ userDatabase, setUserDatabase }) {
 
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
-    setUserDatabase([...userDatabase, data]);
-    navigate("/login");
+    const email = formData.get("email")
+    const password = formData.get("password")
+    const existingUser = userDatabase.find(user => user.email == email /*&& user.password == password*/)
+    if (existingUser) {
+      toast.error("User already exists")
+      event.target.reset()
+    }
+    else {
+      setUserDatabase([...userDatabase, data]);
+      navigate("/login");
+    }
   }
 
   console.log(userDatabase);
 
   return (
     <section className=" flex flex-col justify-center  pb-30 mt-0">
+      <Toaster/>
       <div className="mb-10">
         <h1 className="text-center">Sign Up</h1>
         <p className="text-center">

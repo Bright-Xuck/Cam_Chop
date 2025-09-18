@@ -39,6 +39,7 @@ export default function StoreNav() {
         </p>
       </div>
       <CartItems openCart={openCart} setOpenCart={setOpenCart} /> 
+      <div className={`${openCart ? "inset-0 opacity-30 bg-white fixed z-49": null}`} onClick={() => setOpenCart(false)}></div>
     </nav>
   );
 }

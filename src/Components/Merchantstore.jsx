@@ -192,14 +192,14 @@ export default function MerchantStore() {
               {/* Featured items */}
               <section id="features">
                 <h1 className="mt-10 mb-4 text-xl font-bold">Featured Items</h1>
-                <div className="flex flex-wrap gap-6">
+                <div className="flex flex-wrap gap-6 w-full justify-around">
                   {merchantProducts.map((each) => (
                     <HashLink key={each.id} to={`/merchantstore/item/${each.id}/${each.name}`}>
-                    <div key={each.id} className="flex flex-col w-[160px] h-1/1 relative hover:bg-neutral-200">
+                    <div key={each.id} className="flex flex-col w-[160px] h-full relative hover:bg-neutral-200">
                       <img
                         src={each.image}
                         alt={each.name}
-                        className="w-full min-h-[130px] object-cover rounded-2xl mb-2 transition duration-300 hover:brightness-20  shrink-0a"
+                        className="w-full max-h-[130px] min-h-[130px] object-cover rounded-2xl mb-2 transition duration-300 hover:brightness-20  shrink-0"
                       />
                       <div className="flex flex-col h-full justify-between">
                       <h1 className="text-lg font-semibold">{each.name}</h1>
