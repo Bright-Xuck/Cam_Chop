@@ -11,7 +11,7 @@ export default function Nav() {
 
   return (
     <nav className="fixed top-0 left-0 w-full h-[5rem] border-b-2 shadow-md shadow-black z-50 bg-white">
-      <div className="flex justify-between items-center h-full px-4 lg:px-8">
+      <div className="flex justify-between items-center h-full px-4 lg:px-8 max-[400px]:px-0">
         
         {/* Search Form - Hidden on mobile, visible on desktop */}
         <div className="hidden md:block">
@@ -30,7 +30,7 @@ export default function Nav() {
 
         {/* Mobile Search - Only visible on mobile */}
         <div className="md:hidden flex-1">
-          <form action="" className="flex items-center border rounded-2xl p-2 max-w-[250px]">
+          <form action="" className="flex items-center border rounded-2xl p-2 max-w-[250px] max-sm:max-w-60">
             <Search className="w-4 h-4 text-gray-500 mr-1" />
             <input 
               type="text" 

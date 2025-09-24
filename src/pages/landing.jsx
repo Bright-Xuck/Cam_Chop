@@ -25,16 +25,16 @@ export default function Landing() {
       <main className="pb-30">
         {/* Hero Slider Section */}
         <section
-          className="relative bg-cover bg-center h-[calc(100vh-5rem)] w-full bg-no-repeat"
+          className="relative bg-cover bg-center h-[calc(100vh-5rem)] w-full bg-no-repeat max-sm:h-[calc(100vh-10rem)]"
           style={{ backgroundImage: `url(${imgArray[current]})` }}
         >
           {/* Slider Dots */}
-          <div className="absolute bottom-4 w-full flex justify-center gap-2">
+          <div className="absolute bottom-12 w-full flex justify-center gap-4 max-sm:bottom-4 max-sm:gap-2">
             {imgArray.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setCurrent(i)}
-                className={`w-4 h-4 md:w-5 md:h-5 rounded-full hover:scale-110 transition-transform ${
+                className={`w-8 h-8 rounded-full hover:scale-120 transition-transform shadow-black shadow-md max-sm:w-5 max-sm:h-5 ${
                   i === current ? "bg-blue-700" : "bg-gray-400"
                 }`}
               ></button>
