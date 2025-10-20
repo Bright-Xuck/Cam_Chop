@@ -1,122 +1,209 @@
-import toast,{Toaster} from "react-hot-toast";
-import { useNavigate } from "react-router";
+import toast, { Toaster } from "react-hot-toast";
+import { useNavigate, Link } from "react-router-dom"; // <-- Corrected import
 
 export default function SignupCustomer({ userDatabase, setUserDatabase }) {
   const navigate = useNavigate();
+
   function handleSubmit(event) {
     event.preventDefault();
 
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData.entries());
-    const email = formData.get("email")
-    const password = formData.get("password")
-    const existingUser = userDatabase.find(user => user.email == email /*&& user.password == password*/)
+    const email = formData.get("email");
+   
+    const existingUser = userDatabase.find((user) => user.email === email);
+
     if (existingUser) {
-      toast.error("User already exists")
-      event.target.reset()
-    }
-    else {
+      toast.error("User already exists");
+      event.target.reset();
+    } else {
+      
       setUserDatabase([...userDatabase, data]);
-      navigate("/login");
+      toast.success("Account created successfully!");
+      
+      setTimeout(() => navigate("/login"), 1500);
     }
   }
 
-  console.log(userDatabase);
+  // console.log(userDatabase);
 
   return (
-    <section className=" flex flex-col justify-center  pb-30 mt-0">
-      <Toaster/>
-      <div className="mb-10">
-        <h1 className="text-center">Sign Up</h1>
-        <p className="text-center">
-          Already Have an account? <a href="Signin.html">Sign in</a>
-        </p>
-      </div>
-      <section>
+    <div className="flex min-h-screen items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+      <Toaster position="top-center" />
+
+      <div className="w-full max-w-lg space-y-6">
+        {/* Form Title */}
+        <div>
+          <h2 className="text-center text-3xl font-bold tracking-tight text-gray-900">
+            Create your account
+          </h2>
+          <p className="mt-2 text-center text-sm text-gray-600">
+            Already have an account?{" "}
+            <Link
+              to="/login"
+              className="font-medium text-red-500 hover:text-red-600"
+            >
+              Sign in
+            </Link>
+          </p>
+        </div>
+
         <form
           onSubmit={handleSubmit}
-          className="grid gap-2 grid-cols-2 grid-rows-[auto,1fr,1fr]  w-[60%] m-auto"
+          className="mt-8 space-y-6 rounded-lg bg-white p-8 shadow-xl"
         >
-          <div className="flex flex-col">
-            <label htmlFor="firstname" className="col-span-1 text-xl font-semibold">
-              First Name
-            </label>
-            <input
-              type="text"
-              id="firstname"
-              name="firstname"
-              required
-              autoComplete="name"
-              className="col-span-2 rounded-3xl border border-blue-300 h-10 bg-blue-50"
-            />
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+            {/* First Name */}
+            <div>
+              <label
+                htmlFor="firstname"
+                className="block text-sm font-medium text-gray-700"
+              >
+                First Name
+              </label>
+              <div className="mt-1">
+                <input
+                  type="text"
+                  id="firstname"
+                  name="firstname"
+                  required
+                  autoComplete="given-name"
+                  className="block w-full rounded-md border-gray-300 py-2 px-3 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
+                />
+              </div>
+            </div>
+            {/* Last Name */}
+            <div>
+              <label
+                htmlFor="lastname"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Last Name
+              </label>
+              <div className="mt-1">
+                <input
+                  type="text"
+                  name="lastname"
+                  id="lastname"
+                  required
+                  autoComplete="family-name"
+                  className="block w-full rounded-md border-gray-300 py-2 px-3 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
+                />
+              </div>
+            </div>
           </div>
-          <div className="flex flex-col">
-            <label htmlFor="lastname" className="col-span-1 text-xl font-semibold">
-              Last Name
-            </label>
-            <input
-              type="text"
-              name="lastname"
-              id="lastname"
-              required
-              autoComplete="name"
-              className="col-span-2 rounded-3xl border border-blue-300 h-10 bg-blue-50"
-            />
-          </div>
-          <div className="col-span-2 flex flex-col gap-1.5">
-            <label className="text-xl font-semibold" htmlFor="mail">
+
+          {/* Email */}
+          <div>
+            <label
+              htmlFor="mail"
+              className="block text-sm font-medium text-gray-700"
+            >
               Email
             </label>
-            <input
-              type="email"
-              id="mail"
-              name="email"
-              required
-              autoComplete="email"
-              className=" rounded-3xl border border-blue-300 h-10 bg-blue-50"
-            />
+            <div className="mt-1">
+              <input
+                type="email"
+                id="mail"
+                name="email"
+                required
+                autoComplete="email"
+                className="block w-full rounded-md border-gray-300 py-2 px-3 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
+              />
+            </div>
           </div>
-          <div className="col-span-2 flex flex-col gap-1.5">
-            <label htmlFor="phone" className="text-xl font-semibold">
+
+          {/* Phone Number */}
+          <div>
+            <label
+              htmlFor="phone"
+              className="block text-sm font-medium text-gray-700"
+            >
               Phone Number
             </label>
-            <input
-              type="tel"
-              id="phone"
-              required
-              autoComplete="tel"
-              className="rounded-3xl border border-blue-300 h-10 bg-blue-50"
-            />
+            <div className="mt-1">
+              <input
+                type="tel"
+                id="phone"
+                name="phone" 
+                required
+                autoComplete="tel"
+                className="block w-full rounded-md border-gray-300 py-2 px-3 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
+              />
+            </div>
           </div>
-          <div className="col-span-2 flex flex-col gap-1.5">
-            <label htmlFor="passwords" className="text-xl font-semibold">
+
+          {/* Password */}
+          <div>
+            <label
+              htmlFor="passwords"
+              className="block text-sm font-medium text-gray-700"
+            >
               Password
             </label>
-            <input
-              type="password"
-              id="passwords"
-              name="password"
-              required
-              className="rounded-3xl border border-blue-300 h-10 bg-blue-50"
-            />
+            <div className="mt-1">
+              <input
+                type="password"
+                id="passwords"
+                name="password"
+                required
+                autoComplete="new-password"
+                className="block w-full rounded-md border-gray-300 py-2 px-3 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
+              />
+            </div>
           </div>
-          <p className="col-span-2">
-            By tapping "sign-up" or "continue with" you agree to CamChop's Terms
-            and Privacy Policy. We may text you a verification code. Msg Data
-            rates may apply.
-          </p>
-          <button className="col-span-2 bg-amber-300">Sign-Up</button>
+
+          {/* Fine Print */}
+          <div>
+            <p className="text-center text-xs text-gray-500">
+              By tapping "Sign-Up", you agree to CamChop's Terms
+              and Privacy Policy.
+            </p>
+          </div>
+
+          {/* Submit Button */}
+          <div>
+            <button
+              type="submit"
+              className="flex w-full justify-center rounded-md border border-transparent bg-red-500 py-2 px-4 text-sm font-medium text-white shadow-sm transition-colors duration-150 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+            >
+              Sign-Up
+            </button>
+          </div>
         </form>
-      </section>
-      <p className="text-center"> or </p>
-      <div className="flex flex-col items-center">
-        <div>
-          <a href="#">Continue with Google</a>
+
+      
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-gray-300" />
+          </div>
+          <div className="relative flex justify-center text-sm">
+            <span className="bg-gray-100 px-2 text-gray-500">
+              Or continue with
+            </span>
+          </div>
         </div>
-        <div>
-          <a href="#">Continue with Apple</a>
+
+       
+        <div className="mt-6 grid grid-cols-1 gap-3">
+          <div>
+            <Link
+              to="#"
+              className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
+            >
+              Continue with Google
+            </Link>
+          </div>
+          <div>
+            <Link
+              to="#"
+              className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white py-2 px-4 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
+            >
+              Continue with Apple
+            </Link>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
