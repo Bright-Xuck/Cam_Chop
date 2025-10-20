@@ -1,94 +1,133 @@
 import { Search, MoveRight, Menu, X } from "lucide-react";
-import { Link } from "react-router";
+import { Link } from "react-router-dom"; // Corrected: Import from react-router-dom
 import { useState } from "react";
 
 export default function Nav() {
+  // State for the main mobile menu (on the right)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  // State for the desktop sidebar menu (on the left)
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
+  // Helper function to close both menus, useful for navigation
+  const closeAllMenus = () => {
+    setIsMobileMenuOpen(false);
+    setIsSidebarOpen(false);
+  };
+
   return (
-    <nav className="fixed top-0 left-0 w-full h-[5rem] border-b-2 shadow-md shadow-black z-50 bg-white">
-      <div className="flex justify-between items-center h-full px-4 lg:px-8">
-        
-        {/* Search Form - Hidden on mobile, visible on desktop */}
-        <div className="hidden md:block">
-          <form action="" className="flex items-center border rounded-2xl p-2 w-full max-w-[350px]">
-            <Search className="w-5 h-5 text-gray-500 mr-2" />
-            <input 
-              type="text" 
-              placeholder="Enter your address" 
-              className="flex-1 focus:outline-none text-sm"
-            />
-            <button type="submit" className="ml-2 p-1 hover:bg-gray-100 rounded">
-              <MoveRight className="w-5 h-5 text-gray-500" />
-            </button>
-          </form>
-        </div>
-
-        {/* Mobile Search - Only visible on mobile */}
-        <div className="md:hidden flex-1">
-          <form action="" className="flex items-center border rounded-2xl p-2 max-w-[250px]">
-            <Search className="w-4 h-4 text-gray-500 mr-1" />
-            <input 
-              type="text" 
-              placeholder="Address" 
-              className="flex-1 focus:outline-none text-sm"
-            />
-            <button type="submit" className="ml-1">
-              <MoveRight className="w-4 h-4 text-gray-500" />
-            </button>
-          </form>
-        </div>
-
-        {/* Desktop Navigation Links */}
-        <div className="hidden md:flex gap-4 items-center">
-          <Link 
-            to="/login" 
-            className="text-black hover:cursor-pointer hover:text-red-500 transition-colors px-4 py-2"
-          >
-            Login
-          </Link>
-          <Link 
-            to="/signup" 
-            className="bg-red-500 hover:cursor-pointer text-white px-6 py-3 rounded-2xl text-sm hover:bg-red-600 transition-colors"
-          >
-            Sign Up
-          </Link>
-        </div>
-
-        {/* Mobile Menu Button */}
-        <div className="md:hidden">
-          <button 
-            onClick={toggleMobileMenu}
-            className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
-          >
-            {isMobileMenuOpen ? (
-              <X className="w-6 h-6 text-gray-700" />
-            ) : (
-              <Menu className="w-6 h-6 text-gray-700" />
-            )}
+    <nav className="fixed top-0 left-0 z-50 w-full h-20 bg-white border-b shadow-sm">
+      <div className="flex items-center justify-between h-full px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+        {/* Left Section: Sidebar Toggle and Logo */}
+        <div className="flex items-center gap-4">
+          {/* Desktop Sidebar Toggle */}
+          <button onClick={toggleSidebar} className="hidden p-2 rounded-md md:block hover:bg-gray-100">
+            <Menu className="w-6 h-6 text-gray-800" />
           </button>
+          <Link to="/" onClick={closeAllMenus} className="text-2xl font-bold text-gray-900">
+            CamChop
+          </Link>
         </div>
-      </div>
 
-      {/* Mobile Menu Dropdown */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-[5rem] left-0 right-0 bg-white border-b shadow-lg">
-          <div className="flex flex-col p-4 gap-3">
-            <Link 
-              to="/login" 
-              className="text-black hover:text-red-500 transition-colors py-2 text-center border-b border-gray-200"
-              onClick={() => setIsMobileMenuOpen(false)}
+        
+
+        {/* Right Section */}
+        <div className="flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-2">
+            <Link
+              to="/login"
+              className="px-4 py-2 text-sm font-medium text-gray-700 transition-colors rounded-md hover:bg-gray-100"
             >
               Login
             </Link>
-            <Link 
-              to="/signup" 
-              className="bg-red-500 text-white py-3 px-6 rounded-2xl text-sm hover:bg-red-600 transition-colors text-center"
-              onClick={() => setIsMobileMenuOpen(false)}
+            <Link
+              to="/signup"
+              className="px-4 py-2 text-sm font-medium text-white bg-red-500 rounded-md hover:bg-red-600 transition-colors"
+            >
+              Sign Up
+            </Link>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
+            <button
+              onClick={toggleMobileMenu}
+              className="p-2 transition-colors rounded-lg hover:bg-gray-100"
+            >
+              {isMobileMenuOpen ? (
+                <X className="w-6 h-6 text-gray-800" />
+              ) : (
+                <Menu className="w-6 h-6 text-gray-800" />
+              )}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop Sidebar Panel */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 z-40 hidden md:block"
+          onClick={() => setIsSidebarOpen(false)}
+        >
+          <div className="absolute inset-0 bg-black opacity-25"></div>
+          <div className="relative flex flex-col w-64 h-full p-4 bg-white shadow-xl top-20">
+            <h3 className="mb-4 text-lg font-semibold">Navigation</h3>
+            <Link
+              to="/"
+              onClick={closeAllMenus}
+              className="block px-4 py-2 text-gray-700 rounded-md hover:bg-gray-100 hover:text-red-500"
+            >
+              Home
+            </Link>
+            <Link
+              to="/shop"
+              onClick={closeAllMenus}
+              className="block px-4 py-2 text-gray-700 rounded-md hover:bg-gray-100 hover:text-red-500"
+            >
+              Shop
+            </Link>
+          </div>
+        </div>
+      )}
+
+      {/* Mobile Menu Panel */}
+      {isMobileMenuOpen && (
+        <div className="absolute left-0 w-full bg-white border-b shadow-lg md:hidden top-20">
+          <div className="flex flex-col p-4 space-y-3">
+            <Link
+              to="/"
+              onClick={closeAllMenus}
+              className="block py-2 text-center text-gray-700 rounded-md hover:bg-gray-100 hover:text-red-500"
+            >
+              Home
+            </Link>
+            <Link
+              to="/shop"
+              onClick={closeAllMenus}
+              className="block py-2 text-center text-gray-700 rounded-md hover:bg-gray-100 hover:text-red-500"
+            >
+              Shop
+            </Link>
+             <hr />
+            <Link
+              to="/login"
+              onClick={closeAllMenus}
+              className="block py-2 text-center text-gray-700 rounded-md hover:bg-gray-100 hover:text-red-500"
+            >
+              Login
+            </Link>
+            <Link
+              to="/signup"
+              onClick={closeAllMenus}
+              className="block py-2 text-center text-white bg-red-500 rounded-md hover:bg-red-600"
             >
               Sign Up
             </Link>

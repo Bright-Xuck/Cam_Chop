@@ -41,10 +41,9 @@ export default function SignupMerchant({merchantDatabase, setMerchantDatabase}){
         </h3>
         <div className="promo">
             <i>logo, Marketplace</i>
-            <div className="list sheesh"><span>Delivery & Pickup</span>-Convenient ordering for customers</div>
-            <div className="list"><span>Promotions</span>-Customizable promotions for your store or items</div>
-            <div className="list"><span>Sponsored Listings</span>-In-site advertisement to get your store seen</div>
-            <img src="./frontend/photos/IMG_2564.jpg" alt=""/>
+            <div><span>Delivery & Pickup</span>-Convenient ordering for customers</div>
+            <div><span>Promotions</span>-Customizable promotions for your store or items</div>
+            <div><span>Sponsored Listings</span>-In-site advertisement to get your store seen</div>
         </div>
     </section>
     </>

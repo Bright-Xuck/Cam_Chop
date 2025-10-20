@@ -27,7 +27,7 @@ export default function LoginMerchant({merchantDatabase}) {
   return (
     <main className="grid grid-cols-2 ">
         <div>
-            <img src="photos/auth.png" alt="phone" />
+            <img src="/photos/auth.png" alt="phone" />
         </div>
         <section className=" bg-red-200">
             <div className="w-4/5 m-auto grid justify-center">

@@ -14,7 +14,7 @@ export default function StoreNav() {
       <div className="flex items-center gap-3 sm:gap-6">
         <Menu className="w-6 h-6 cursor-pointer" />
         <div className="flex items-center gap-2">
-          <img src="photos/logo.png" alt="logo" className="h-10 sm:h-12" />
+          <img src="/photos/logo.png" alt="logo" className="h-10 sm:h-12" />
           <h1 className="font-bold text-lg hidden sm:block">CamChop</h1>
         </div>
       </div>
