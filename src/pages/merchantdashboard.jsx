@@ -44,7 +44,7 @@ export default function Merchant() {
       <div className="w-3/5">
         <article className="mb-6">
           <h1 className="text-xl font-bold mb-2">
-            Welcome to your new store, {"Person Logged in"}
+            Welcome to your new store, {currentUser.name}
           </h1>
           <p className="text-gray-600">
             This is your quick start guide. Complete these steps to activate

@@ -37,7 +37,7 @@ export default function Sidebar() {
     <nav className="box-border h-auto w-[180px] py-1.5 px-3 grid grid-cols-1 border-r-2 border-r-neutral-200 sticky left-0 top-0">
       <ul className="list-none h-[80%] flex flex-col  gap-1.5">
         <li className="flex justify-end ">
-          <button>{"store owner"}</button>
+          <button>{currentUser.name}</button>
         </li>
         <li>
           <NavLink
