@@ -1,101 +1,138 @@
 import { Toaster } from "react-hot-toast";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router";
+import { useNavigate, Link } from "react-router";
+import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
+import Button from "./ui/Button";
+import Input from "./ui/Input";
 
-export default function Logincomponent(prop) {
-  const Navigate = useNavigate();
+export default function Logincomponent() {
+  const navigate = useNavigate();
+  const { login } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
+  const [errors, setErrors] = useState({});
 
-  function handleLogin(event) {
+  async function handleLogin(event) {
     event.preventDefault();
+    setErrors({});
+    
     const formData = new FormData(event.target);
-    const email = formData.get("login");
+    const email = formData.get("email");
     const password = formData.get("password");
 
-    if (email === "" || password === "") {
-      toast.error("Please fill in all fields");
-    } else {
-      
-      const check = prop.data.find(
-        (each) => each.email == email && each.password == password
-      );
-
-      if (check) {
-        toast.success("Login Successful");
-        setTimeout(() => Navigate("/shop"), 2000); 
-      } else {
-        toast.error("Incorrect Email or Password");
-        event.target.reset(); 
-      }
+    // Client-side validation
+    const newErrors = {};
+    if (!email) newErrors.email = "Email is required";
+    else if (!/\S+@\S+\.\S+/.test(email)) newErrors.email = "Invalid email format";
+    if (!password) newErrors.password = "Password is required";
+    
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
     }
+
+    setIsLoading(true);
+    
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 800));
+    
+    const result = login(email, password);
+    
+    if (result.success) {
+      toast.success("Login successful!");
+      setTimeout(() => navigate("/shop"), 1000);
+    } else {
+      toast.error("Incorrect email or password");
+      setErrors({ email: "Invalid credentials" });
+    }
+    
+    setIsLoading(false);
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="flex min-h-screen items-center justify-center bg-background py-12 px-4 sm:px-6 lg:px-8">
       <Toaster position="top-center" />
 
       <div className="w-full max-w-md space-y-8">
         {/* Form Title */}
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
+        <div className="text-center">
+          <h1 className="text-3xl font-bold tracking-tight text-foreground">
             Sign in to your account
-          </h2>
+          </h1>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Don&apos;t have an account?{" "}
+            <Link to="/signup" className="font-medium text-primary hover:text-primary/80">
+              Sign up
+            </Link>
+          </p>
         </div>
 
         {/* The Form */}
         <form
-          className="mt-8 space-y-6 rounded-lg bg-white p-8 shadow-xl"
+          className="mt-8 space-y-6 rounded-xl bg-card border border-border p-8 shadow-sm"
           onSubmit={handleLogin}
+          noValidate
         >
-          {/* Email Field */}
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Email
-            </label>
-            <div className="mt-1">
+          <Input
+            label="Email"
+            type="email"
+            id="email"
+            name="email"
+            autoComplete="email"
+            required
+            error={errors.email}
+            placeholder="you@example.com"
+          />
+
+          <Input
+            label="Password"
+            type="password"
+            id="password"
+            name="password"
+            autoComplete="current-password"
+            required
+            error={errors.password}
+            placeholder="Enter your password"
+          />
+
+          <div className="flex items-center justify-between">
+            <label className="flex items-center gap-2">
               <input
-                type="email"
-                id="email"
-                name="login" 
-                autoComplete="email"
-                required
-                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
+                type="checkbox"
+                className="w-4 h-4 rounded border-border text-primary focus:ring-primary"
               />
-            </div>
+              <span className="text-sm text-muted-foreground">Remember me</span>
+            </label>
+            <Link to="/forgot-password" className="text-sm text-primary hover:text-primary/80">
+              Forgot password?
+            </Link>
           </div>
 
-          {/* Password Field */}
-          <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Password
-            </label>
-            <div className="mt-1">
-              <input
-                type="password"
-                id="password"
-                name="password"
-                autoComplete="current-password"
-                required
-                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
-              />
-            </div>
-          </div>
-
-          {/* Submit Button */}
-          <div>
-            <button
-              type="submit"
-              className="flex w-full justify-center rounded-md border border-transparent bg-red-500 py-2 px-4 text-sm font-medium text-white shadow-sm transition-colors duration-150 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
-            >
-              Sign in
-            </button>
-          </div>
+          <Button type="submit" className="w-full" loading={isLoading}>
+            Sign in
+          </Button>
         </form>
+
+        {/* Social Login */}
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-border" />
+          </div>
+          <div className="relative flex justify-center text-sm">
+            <span className="bg-background px-2 text-muted-foreground">
+              Or continue with
+            </span>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-3">
+          <Button variant="outline" type="button">
+            Google
+          </Button>
+          <Button variant="outline" type="button">
+            Apple
+          </Button>
+        </div>
       </div>
     </div>
   );

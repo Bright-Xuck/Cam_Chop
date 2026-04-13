@@ -1,5 +1,5 @@
 import "../src/index.css";
-import { HashRouter, Routes, Route, Router } from "react-router";
+import { HashRouter, Routes, Route } from "react-router";
 import Shop from "./pages/Shop";
 import Landing from "./pages/landing";
 import Signup from "./pages/Signup";
@@ -10,12 +10,16 @@ import Merchantlayout from "./Components/merchantLayout";
 import Customerlayout from "./Components/customerlayout";
 import SignupMerchant from "./Components/SignupMerchant";
 import LoginMerchant from "./Components/LoginMerchant";
-import {merchants} from "./data/merchants";
+import { merchants } from "./data/merchants";
 import MenuManager from "./Components/MenuManager";
 import { products } from "./data/productdata";
 import MerchantStore from "./Components/Merchantstore";
 import ProductInfo from "./Components/ProductInfo";
 import { Users } from "./data/users";
+import Profile from "./pages/Profile";
+import Orders from "./pages/Orders";
+import Checkout from "./pages/Checkout";
+import Search from "./pages/Search";
 
 
 export default function App() {
@@ -59,6 +63,38 @@ export default function App() {
           element={
             <Customerlayout>
               <LoginPage data={userDatabase} />
+            </Customerlayout>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <Customerlayout>
+              <Profile />
+            </Customerlayout>
+          }
+        />
+        <Route
+          path="/orders"
+          element={
+            <Customerlayout>
+              <Orders />
+            </Customerlayout>
+          }
+        />
+        <Route
+          path="/checkout"
+          element={
+            <Customerlayout>
+              <Checkout />
+            </Customerlayout>
+          }
+        />
+        <Route
+          path="/search"
+          element={
+            <Customerlayout>
+              <Search />
             </Customerlayout>
           }
         />
