@@ -3,33 +3,35 @@ import { HashRouter, Routes, Route } from "react-router";
 import { useState } from "react";
 
 // Customer Pages
-import Shop from "./pages/Shop";
-import Landing from "./pages/landing";
-import Signup from "./pages/Signup";
-import LoginPage from "./pages/Login";
-import Profile from "./pages/Profile";
-import Orders from "./pages/Orders";
-import Checkout from "./pages/Checkout";
-import Search from "./pages/Search";
+import ShopPage from "./pages/customer/ShopPage";
+import LandingPage from "./pages/customer/LandingPage";
+import ProfilePage from "./pages/profile";
+import OrdersPage from "./pages/customer/OrdersPage";
+import CheckoutPage from "./pages/customer/CheckoutPage";
+import SearchPage from "./pages/customer/SearchPage";
+
+// Customer Auth Components
+import CustomerAuthSignup from "./Components/customer/auth/CustomerAuthSignup";
+import CustomerAuthLogin from "./Components/customer/auth/CustomerAuthLogin";
 
 // Merchant Pages
-import MerchantDashboard from "./pages/merchantdashboard";
-import LiveOrders from "./pages/merchant/LiveOrders";
-import CatalogManager from "./pages/merchant/CatalogManager";
-import StoreSettings from "./pages/merchant/StoreSettings";
-import Analytics from "./pages/merchant/Analytics";
+import MerchantDashboardPage from "./pages/merchant/MerchantDashboardPage";
+import LiveOrdersPage from "./pages/merchant/LiveOrders";
+import CatalogManagerPage from "./pages/merchant/CatalogManager";
+import StoreSettingsPage from "./pages/merchant/StoreSettings";
+import AnalyticsPage from "./pages/merchant/Analytics";
 
 // Layouts
-import Customerlayout from "./Components/customerlayout";
-import MerchantLayout from "./Components/merchant/MerchantLayout";
+import CustomerPageLayout from "./Components/shared/layouts/CustomerPageLayout";
+import MerchantDashboardLayout from "./Components/merchant/layout/MerchantDashboardLayout";
 
 // Auth Components
-import SignupMerchant from "./Components/SignupMerchant";
-import LoginMerchant from "./Components/LoginMerchant";
+import MerchantAuthSignup from "./Components/merchant/auth/MerchantAuthSignup";
+import MerchantAuthLogin from "./Components/merchant/auth/MerchantAuthLogin";
 
 // Store Components
-import MerchantStore from "./Components/Merchantstore";
-import ProductInfo from "./Components/ProductInfo";
+import MerchantStoreView from "./Components/merchant/store-view/MerchantStoreView";
+import ProductDetailPage from "./Components/merchant/store-view/ProductDetailPage";
 
 // Data
 import { merchants } from "./data/merchants";
@@ -49,81 +51,81 @@ export default function App() {
         <Route
           path="/"
           element={
-            <Customerlayout>
-              <Landing />
-            </Customerlayout>
+            <CustomerPageLayout>
+              <LandingPage />
+            </CustomerPageLayout>
           }
         />
         <Route
           path="/shop"
           element={
-            <Customerlayout>
-              <Shop />
-            </Customerlayout>
+            <CustomerPageLayout>
+              <ShopPage />
+            </CustomerPageLayout>
           }
         />
         <Route
           path="/signup"
           element={
-            <Customerlayout>
-              <Signup
+            <CustomerPageLayout>
+              <CustomerAuthSignup
                 userDatabase={userDatabase}
                 setUserDatabase={setUserDatabase}
               />
-            </Customerlayout>
+            </CustomerPageLayout>
           }
         />
         <Route
           path="/login"
           element={
-            <Customerlayout>
-              <LoginPage data={userDatabase} />
-            </Customerlayout>
+            <CustomerPageLayout>
+              <CustomerAuthLogin data={userDatabase} />
+            </CustomerPageLayout>
           }
         />
         <Route
           path="/profile"
           element={
-            <Customerlayout>
-              <Profile />
-            </Customerlayout>
+            <CustomerPageLayout>
+              <ProfilePage />
+            </CustomerPageLayout>
           }
         />
         <Route
           path="/orders"
           element={
-            <Customerlayout>
-              <Orders />
-            </Customerlayout>
+            <CustomerPageLayout>
+              <OrdersPage />
+            </CustomerPageLayout>
           }
         />
         <Route
           path="/checkout"
           element={
-            <Customerlayout>
-              <Checkout />
-            </Customerlayout>
+            <CustomerPageLayout>
+              <CheckoutPage />
+            </CustomerPageLayout>
           }
         />
         <Route
           path="/search"
           element={
-            <Customerlayout>
-              <Search />
-            </Customerlayout>
+            <CustomerPageLayout>
+              <SearchPage />
+            </CustomerPageLayout>
           }
         />
 
         {/* ========== MERCHANT STORE (Public) ========== */}
-        <Route path="/merchantstore" element={<MerchantStore />} />
-        <Route path="/merchantstore/item/:id" element={<MerchantStore />} />
-        <Route path="/merchantstore/item/:id/:name" element={<ProductInfo />} />
+        <Route path="/merchantstore" element={<MerchantStoreView />} />
+        <Route path="/merchantstore/item/:id" element={<MerchantStoreView />} />
+        <Route path="/merchantstore/item/:id/:name" element={<ProductDetailPage />} />
 
         {/* ========== MERCHANT AUTH ROUTES ========== */}
         <Route
           path="/merchant/signup"
           element={
-            <SignupMerchant
+            <MerchantAuthSignup
               merchantDatabase={merchantDatabase}
               setMerchantDatabase={setMerchantDatabase}
             />
@@ -131,48 +133,48 @@ export default function App() {
         />
         <Route
           path="/merchant/login"
-          element={<LoginMerchant merchantDatabase={merchantDatabase} />}
+          element={<MerchantAuthLogin merchantDatabase={merchantDatabase} />}
         />
 
         {/* ========== MERCHANT PORTAL ROUTES ========== */}
         <Route
           path="/merchant"
           element={
-            <MerchantLayout>
-              <MerchantDashboard />
-            </MerchantLayout>
+            <MerchantDashboardLayout>
+              <MerchantDashboardPage />
+            </MerchantDashboardLayout>
           }
         />
         <Route
           path="/merchant/orders"
           element={
-            <MerchantLayout>
-              <LiveOrders />
-            </MerchantLayout>
+            <MerchantDashboardLayout>
+              <LiveOrdersPage />
+            </MerchantDashboardLayout>
           }
         />
         <Route
           path="/merchant/menu"
           element={
-            <MerchantLayout>
-              <CatalogManager />
-            </MerchantLayout>
+            <MerchantDashboardLayout>
+              <CatalogManagerPage />
+            </MerchantDashboardLayout>
           }
         />
         <Route
           path="/merchant/analytics"
           element={
-            <MerchantLayout>
-              <Analytics />
-            </MerchantLayout>
+            <MerchantDashboardLayout>
+              <AnalyticsPage />
+            </MerchantDashboardLayout>
           }
         />
         <Route
           path="/merchant/settings"
           element={
-            <MerchantLayout>
-              <StoreSettings />
-            </MerchantLayout>
+            <MerchantDashboardLayout>
+              <StoreSettingsPage />
+            </MerchantDashboardLayout>
           }
         />
       </Routes>
