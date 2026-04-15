@@ -1,12 +1,10 @@
 import { Bell, Menu, ShoppingCart } from "lucide-react";
-import { useCart } from "../../../context/CartStore";
 import { useState } from "react";
 import ShoppingCartDrawer from "../common/ShoppingCartDrawer";
 
 export default function StorePageNavigation() {
-  const { getTotalItems } = useCart();
-  const totalItems = getTotalItems();
   const [openCart, setOpenCart] = useState(false);
+  const totalItems = 0;
 
   return (
     <nav className="grid grid-cols-3 h-16 border-b border-b-neutral-200 px-2 sm:px-4 fixed top-0 w-full bg-white z-50">

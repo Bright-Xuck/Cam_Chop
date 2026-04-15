@@ -104,9 +104,9 @@ export default function App() {
         />
 
         {/* ========== MERCHANT STORE (Public) ========== */}
-        <Route path="/merchantstore" element={<MerchantStoreView />} />
-        <Route path="/merchantstore/item/:id" element={<MerchantStoreView />} />
-        <Route path="/merchantstore/item/:id/:name" element={<ProductDetailPage />} />
+        <Route path="/merchantstore" element={<CustomerPageLayout><MerchantStoreView /></CustomerPageLayout>} />
+        <Route path="/merchantstore/item/:id" element={<CustomerPageLayout><MerchantStoreView /></CustomerPageLayout>} />
+        <Route path="/merchantstore/item/:id/:name" element={<CustomerPageLayout><ProductDetailPage /></CustomerPageLayout>} />
 
         {/* ========== MERCHANT AUTH ROUTES ========== */}
         <Route

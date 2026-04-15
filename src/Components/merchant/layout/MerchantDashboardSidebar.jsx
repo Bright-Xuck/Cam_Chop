@@ -13,7 +13,6 @@ import {
   ChevronRight,
   Bell
 } from "lucide-react";
-import { useMerchant } from "../../../context/MerchantProvider";
 
 const navItems = [
   {

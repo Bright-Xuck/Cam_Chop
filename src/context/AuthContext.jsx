@@ -4,43 +4,30 @@ const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
 
-  const login = (email, password) => {
-    // Backend integration will be added here
-    return { success: false, error: "Backend not connected" };
+  const login = (userData) => {
+    // will be replaced with backend response later
+    setCurrentUser(userData);
   };
 
   const logout = () => {
     setCurrentUser(null);
   };
 
-  const updateProfile = (updates) => {
-    const updatedUser = { ...currentUser, ...updates };
-    setCurrentUser(updatedUser);
-    return { success: true, user: updatedUser };
-  };
-
-  const contextValue = {
-    currentUser,
-    isLoading,
-    isAuthenticated: !!currentUser,
-    login,
-    logout,
-    updateProfile
-  };
-
   return (
-    <AuthContext.Provider value={contextValue}>
+    <AuthContext.Provider
+      value={{
+        currentUser,
+        isAuthenticated: !!currentUser,
+        login,
+        logout,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
 }
 
 export function useAuth() {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
-  }
-  return context;
+  return useContext(AuthContext);
 }
