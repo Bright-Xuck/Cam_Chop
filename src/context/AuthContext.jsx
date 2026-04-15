@@ -1,43 +1,23 @@
-import { createContext, useState, useContext, useEffect } from "react";
-import { Users } from "../data/users";
+import { createContext, useState, useContext } from "react";
 
 const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Simulate checking for persisted auth state
-  useEffect(() => {
-    const savedUser = sessionStorage.getItem("camchop_user");
-    if (savedUser) {
-      setCurrentUser(JSON.parse(savedUser));
-    }
-    setIsLoading(false);
-  }, []);
+  const [isLoading, setIsLoading] = useState(false);
 
   const login = (email, password) => {
-    const user = Users.find(
-      (u) => u.email === email && u.password === password
-    );
-    if (user) {
-      const userData = { ...user, password: undefined };
-      setCurrentUser(userData);
-      sessionStorage.setItem("camchop_user", JSON.stringify(userData));
-      return { success: true, user: userData };
-    }
-    return { success: false, error: "Invalid email or password" };
+    // Backend integration will be added here
+    return { success: false, error: "Backend not connected" };
   };
 
   const logout = () => {
     setCurrentUser(null);
-    sessionStorage.removeItem("camchop_user");
   };
 
   const updateProfile = (updates) => {
     const updatedUser = { ...currentUser, ...updates };
     setCurrentUser(updatedUser);
-    sessionStorage.setItem("camchop_user", JSON.stringify(updatedUser));
     return { success: true, user: updatedUser };
   };
 

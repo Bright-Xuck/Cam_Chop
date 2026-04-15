@@ -1,47 +1,33 @@
 import {MapPin, Star } from "lucide-react";
-import { products } from "../../../data/productdata";
 import { useParams } from "react-router";
-import { merchants } from "../../../data/merchants";
-import { Menus } from "../../../data/menu";
 import { HashLink } from "react-router-hash-link";
 import { useState, useEffect } from "react";
 import Footer from "../../shared/common/Footer";
-import StorePageNavigation from "../../shared/navigation/StorePageNavigation";
 import { useCart } from "../../../context/CartStore";
 
 export default function MerchantStoreView() {
   const params = useParams();
   const { id } = params;
-  const product = products.find((product) => product.id == id);
   const [activesection, setactivesection] = useState("features");
   const {addToCart} = useCart()
 
-  const merchantProducts = products.filter(
-    (products) => products.merchantId == product.merchantId
-  );
-  const store = merchants.find(
-    (merchant) => merchant.merchantId == product.merchantId
-  );
-  const menu = Menus.filter(
-    (allmenu) => allmenu.merchantId == product.merchantId
-  );
+  // Placeholder data until backend integration
+  const StoreNav = () => <header className="h-16" />;
+  const store = {
+    banner: "",
+    name: "",
+    description: "",
+    services: { delivery: false, pickup: false, dineIn: false },
+    rating: 0,
+    reviews: []
+  };
+  const hours = { open: "09:00", close: "22:00" };
+  const menu = [];
+  const merchantProducts = [];
 
   const handleAddToCart = (item) => {
-    addToCart(item, 1); // Add 1 quantity of the item
+    addToCart(item, 1);
   };
-
-  const date = new Date();
-  const days = [
-    "sunday",
-    "monday",
-    "tuesday",
-    "wednesday",
-    "thursday",
-    "friday",
-    "saturday",
-  ];
-  const today = days[date.getDay()];
-  const hours = store.hours[today];
 
   useEffect(() => {
     const sections = document.querySelectorAll("section[id], article[id]"); 

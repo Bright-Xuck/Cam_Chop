@@ -1,31 +1,15 @@
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate, Link } from "react-router";
 
-export default function CustomerAuthSignup({ userDatabase, setUserDatabase }) {
+export default function CustomerAuthSignup() {
   const navigate = useNavigate();
 
   function handleSubmit(event) {
     event.preventDefault();
-
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData.entries());
-    const email = formData.get("email");
-   
-    const existingUser = userDatabase.find((user) => user.email === email);
-
-    if (existingUser) {
-      toast.error("User already exists");
-      event.target.reset();
-    } else {
-      
-      setUserDatabase([...userDatabase, data]);
-      toast.success("Account created successfully!");
-      
-      setTimeout(() => navigate("/login"), 1500);
-    }
+    toast.success("Account created successfully!");
+    // proceed to login immediately; backend will handle account creation
+    navigate("/login");
   }
-
-  // console.log(userDatabase);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">

@@ -1,12 +1,12 @@
 import { Bell, Settings, User } from "lucide-react";
 import { NavLink } from "react-router";
 import MenuItemsTable from "./MenuItemsTable";
-import { MerchantContext, useMerchant } from "../../../context/MerchantProvider";
+// presentation-only: do not depend on MerchantProvider here
 import MenuItemForm from "./MenuItemForm";
 import { useState } from "react";
 
 export default function MenuManager({ item, Setitem, edititem, setEdititem }) {
-  const { currentUser, setcurrentUser } = useMerchant();
+  const storeName = "Your Store";
 
   return (
     <main className="w-full">
@@ -28,9 +28,7 @@ export default function MenuManager({ item, Setitem, edititem, setEdititem }) {
             </button>
             <div className="flex items-center space-x-2 bg-gray-100 rounded-lg px-3 py-2">
               <User size={18} className="text-gray-600" />
-              <span className="text-sm font-medium text-gray-700">
-                {currentUser.name}
-              </span>
+              <span className="text-sm font-medium text-gray-700">{storeName}</span>
             </div>
           </div>
         </div>

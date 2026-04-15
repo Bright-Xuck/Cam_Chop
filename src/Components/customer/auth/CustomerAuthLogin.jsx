@@ -12,7 +12,7 @@ export default function CustomerAuthLogin() {
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
-  async function handleLogin(event) {
+  function handleLogin(event) {
     event.preventDefault();
     setErrors({});
     
@@ -33,14 +33,12 @@ export default function CustomerAuthLogin() {
 
     setIsLoading(true);
     
-    // Simulate API delay
-    await new Promise(resolve => setTimeout(resolve, 800));
-    
     const result = login(email, password);
     
     if (result.success) {
       toast.success("Login successful!");
-      setTimeout(() => navigate("/shop"), 1000);
+      // navigate immediately; backend will handle real auth flow
+      navigate("/shop");
     } else {
       toast.error("Incorrect email or password");
       setErrors({ email: "Invalid credentials" });

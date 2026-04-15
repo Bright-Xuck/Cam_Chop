@@ -1,66 +1,33 @@
 import { Link, useNavigate } from "react-router";
-import { useMerchant } from "../../../context/MerchantProvider";
 import toast, { Toaster } from "react-hot-toast";
 
-export default function LoginMerchant({ merchantDatabase }) {
+export default function MerchantAuthLogin() {
   const navigate = useNavigate();
-  const { currentUser, setcurrentUser } = useMerchant();
 
-  function checkemail(event) {
+  function handleSubmit(event) {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const currentemail = formData.get("email");
-    document.querySelector("#email").value = "";
-
-    const user = merchantDatabase.find((item) => item.email === currentemail);
-
-    if (user) {
-      console.log("found email: ", user);
-      setcurrentUser(user);
-      navigate("/merchant");
-    } else {
-      console.log("email not found");
-      toast.error("Email not found");
-    }
+    toast.success("Logged in — opening dashboard");
+    // immediate navigation; authentication will be handled by backend later
+    navigate("/merchant");
   }
 
   return (
-    <main className="grid grid-cols-2 ">
-      <div>
-        <img src="/photos/auth.png" alt="phone" />
-      </div>
-      <section className=" bg-red-200">
-        <div className="w-4/5 m-auto grid justify-center">
-          <h1 className="text-2xl font-bold leading-7 mb-12">
-            CamChop Merchant
-          </h1>
-          <form action="" onSubmit={checkemail} className="grid">
-            <label htmlFor="email">Email</label>
-            <input type="text" id="email" name="email" />
-            <Toaster position="top-center" />
-            <button className="hover:cursor-pointer bg-red-500">
-              Continue to Log In
-            </button>
-          </form>
-          <div>
-            <p>Log in with:</p>
-            <div className="grid grid-cols-3 gap-2">
-              <h1>Google</h1>
-              <h1>Facebook</h1>
-              <h1>Apple</h1>
-            </div>
-          </div>
-          <div>
-            <div>
-              <h1>By logging in, you agree to CamChop's Merchant</h1>{" "}
-              <Link>Security Terms</Link>.
-            </div>
-            <div>
-              No account? <Link>Partner with CamChop</Link>
-            </div>
-          </div>
+    <div className="flex min-h-screen items-center justify-center bg-background py-12 px-4">
+      <Toaster position="top-center" />
+      <div className="w-full max-w-4xl grid grid-cols-2 gap-8 bg-white rounded-lg shadow overflow-hidden">
+        <div className="hidden md:block">
+          <img src="/photos/auth.png" alt="phone" className="w-full h-full object-cover" />
         </div>
-      </section>
-    </main>
+        <div className="p-8">
+          <h1 className="text-2xl font-bold mb-6">CamChop Merchant</h1>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <label className="block text-sm font-medium">Email</label>
+            <input id="email" name="email" type="email" required className="w-full rounded-md border px-3 py-2" />
+            <button type="submit" className="w-full bg-primary text-white py-2 rounded-md">Continue to dashboard</button>
+          </form>
+          <div className="mt-4 text-sm text-muted-foreground">No account? <Link to="/merchant/signup" className="text-primary">Partner with CamChop</Link></div>
+        </div>
+      </div>
+    </div>
   );
 }

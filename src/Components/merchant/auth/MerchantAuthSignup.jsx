@@ -1,51 +1,44 @@
-import { useNavigate } from "react-router"
-import { useEffect } from "react"
-export default function SignupMerchant({merchantDatabase, setMerchantDatabase}){
+import toast, { Toaster } from "react-hot-toast";
+import { useNavigate, Link } from "react-router";
 
-    const naviagte = useNavigate()
-    function GetMerchant(event){
-        event.preventDefault()
-        const data = new FormData(event.target)
-        const merchantdata = Object.fromEntries(data.entries())
+export default function MerchantAuthSignup() {
+    const navigate = useNavigate();
 
-        const newMerchant = {
-            merchantId:`m${merchantDatabase.length + 1}`,
-            ...merchantdata
-        }
-        setMerchantDatabase([...merchantDatabase, newMerchant])
-        setTimeout(()=>{naviagte("/merchant/login")}, 1500)   
+    function handleSubmit(event) {
+        event.preventDefault();
+        toast.success("Account created — continue to login");
+        // proceed immediately to merchant login
+        navigate("/merchant/login");
     }
 
-    useEffect(() =>{console.log(merchantDatabase)}, [merchantDatabase])
-    
-    return(
-        <>
-        <main className="">
-        <h1>Sign Up for CamChop and unlock Sales</h1>
-        <form action="" onSubmit={GetMerchant} className="border border-black w-3/5 m-auto">
-            <h3>0% commissions for up to 30 days</h3>
-            <p >Partner with CamChop to help drive growth and take your business to the next level</p>
-            <div className="grid grid-cols-2 gap-4 p-3">
-            <input type="text" name="name" id="name" placeholder="Business Name" className="col-span-2"/>
-            <input type="text" name="location" id="location" placeholder="Business Address" className="col-span-2"/>
-            <input type="email" name="email" id="email" placeholder="Email Address"/>
-            <input type="tel" name="tel" id="tel" placeholder="Business Phone"/>
+    return (
+        <div className="flex min-h-screen items-center justify-center bg-background py-12 px-4 sm:px-6 lg:px-8">
+            <Toaster position="top-center" />
+            <div className="w-full max-w-3xl grid grid-cols-2 gap-8 items-start">
+                <section className="bg-white p-8 rounded-lg shadow">
+                    <h2 className="text-2xl font-bold mb-2">Sign up for CamChop</h2>
+                    <p className="text-sm text-muted-foreground mb-6">Partner with CamChop to grow your business.</p>
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        <input name="name" required placeholder="Business name" className="w-full rounded-md border px-3 py-2" />
+                        <input name="location" required placeholder="Business address" className="w-full rounded-md border px-3 py-2" />
+                        <input name="email" type="email" required placeholder="Email address" className="w-full rounded-md border px-3 py-2" />
+                        <input name="tel" type="tel" placeholder="Phone" className="w-full rounded-md border px-3 py-2" />
+                        <div className="flex gap-3">
+                            <button type="submit" className="flex-1 bg-primary text-white py-2 rounded-md">Create account</button>
+                            <button type="button" onClick={() => navigate("/merchant/login")} className="flex-1 border py-2 rounded-md">Have an account</button>
+                        </div>
+                    </form>
+                </section>
+
+                <aside className="hidden md:block bg-gradient-to-br from-primary/10 to-secondary p-8 rounded-lg">
+                    <h3 className="text-lg font-semibold mb-3">Your door to profitable growth</h3>
+                    <ul className="space-y-2 text-sm">
+                        <li>Delivery &amp; Pickup</li>
+                        <li>Promotions &amp; Sponsored Listings</li>
+                        <li>Easy menu management</li>
+                    </ul>
+                </aside>
             </div>
-            <p>By clicking "Start", I agree to receive marketing electronic communications from CamChop</p>
-            <button className="bg-red-500">Start</button>
-        </form>
-    </main>
-    <section className="">
-        <h1>Your door to more profitable growth</h1>
-        <h3>We're here to help you navigate the endless complexities of running a business.
-        </h3>
-        <div className="promo">
-            <i>logo, Marketplace</i>
-            <div><span>Delivery & Pickup</span>-Convenient ordering for customers</div>
-            <div><span>Promotions</span>-Customizable promotions for your store or items</div>
-            <div><span>Sponsored Listings</span>-In-site advertisement to get your store seen</div>
         </div>
-    </section>
-    </>
-    )
+    );
 }

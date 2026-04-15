@@ -1,44 +1,49 @@
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { useNavigate, Link } from "react-router";
 import { Package, Clock, MapPin, ChevronRight, Filter, Search, RefreshCw } from "lucide-react";
-import { useAuth } from "../../context/AuthContext";
-import { mockOrders, orderStatuses } from "../../data/orders";
+// presentation-only: do not depend on AuthContext
 import Button from "../../Components/ui/Button";
 import Badge from "../../Components/ui/Badge";
 import { OrderCardSkeleton } from "../../Components/ui/Skeleton";
 
 export default function Orders() {
-  const { currentUser, isAuthenticated, isLoading } = useAuth();
+  const currentUser = null;
+  const isAuthenticated = true; // allow viewing placeholder orders
+  const isLoading = false;
   const navigate = useNavigate();
   const [statusFilter, setStatusFilter] = useState("all");
   const [searchQuery, setSearchQuery] = useState("");
   const [isRefreshing, setIsRefreshing] = useState(false);
 
-  // Simulate loading state for orders
-  const [ordersLoading, setOrdersLoading] = useState(false);
+  const sampleOrders = [
+    {
+      id: "1001",
+      merchantName: "Sample Merchant",
+      createdAt: new Date().toISOString(),
+      status: "delivered",
+      items: [{ name: "Sample Dish", quantity: 2 }],
+      deliveryAddress: "12 Example St",
+      total: 9000
+    },
+    {
+      id: "1002",
+      merchantName: "Another Merchant",
+      createdAt: new Date(Date.now() - 2 * 86400000).toISOString(),
+      status: "pending",
+      items: [{ name: "Sample Bowl", quantity: 1 }],
+      deliveryAddress: "45 Market Rd",
+      total: 3200
+    }
+  ];
 
-  // Filter orders for current user
-  const userOrders = useMemo(() => {
-    if (!currentUser) return [];
-    return mockOrders.filter(order => order.userId === currentUser.email);
-  }, [currentUser]);
+  const filteredOrders = sampleOrders.filter((o) => {
+    const matchesStatus = statusFilter === "all" ? true : o.status === statusFilter;
+    const matchesQuery = !searchQuery || o.id.includes(searchQuery) || o.merchantName.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesStatus && matchesQuery;
+  });
 
-  // Apply filters
-  const filteredOrders = useMemo(() => {
-    return userOrders.filter(order => {
-      const matchesStatus = statusFilter === "all" || order.status === statusFilter;
-      const matchesSearch = order.id.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        order.merchantName.toLowerCase().includes(searchQuery.toLowerCase());
-      return matchesStatus && matchesSearch;
-    });
-  }, [userOrders, statusFilter, searchQuery]);
-
-  const handleRefresh = async () => {
-    setIsRefreshing(true);
-    setOrdersLoading(true);
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    setOrdersLoading(false);
-    setIsRefreshing(false);
+  const handleRefresh = () => {
+    // Will fetch from backend
   };
 
   // Format date for display
@@ -104,12 +109,7 @@ export default function Orders() {
         <header className="mb-6">
           <div className="flex items-center justify-between mb-4">
             <h1 className="text-2xl sm:text-3xl font-bold text-foreground">Order History</h1>
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              onClick={handleRefresh}
-              disabled={isRefreshing}
-            >
+            <Button variant="ghost" size="sm" onClick={() => { setIsRefreshing(true); setTimeout(() => setIsRefreshing(false), 500); }} disabled={isRefreshing}>
               <RefreshCw className={`w-4 h-4 ${isRefreshing ? "animate-spin" : ""}`} />
               <span className="hidden sm:inline">Refresh</span>
             </Button>
@@ -188,7 +188,7 @@ export default function Orders() {
                       <p className="text-sm text-muted-foreground">{order.id}</p>
                     </div>
                     <Badge variant={getStatusVariant(order.status)}>
-                      {orderStatuses[order.status]?.label}
+                      {order.status ? order.status.charAt(0).toUpperCase() + order.status.slice(1) : "Unknown"}
                     </Badge>
                   </div>
                   <div className="flex items-center gap-4 text-sm text-muted-foreground">

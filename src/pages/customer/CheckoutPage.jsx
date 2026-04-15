@@ -6,7 +6,7 @@ import {
   AlertCircle
 } from "lucide-react";
 import { useCart } from "../../context/CartStore";
-import { useAuth } from "../../context/AuthContext";
+// presentation-only: do not depend on AuthContext
 import Button from "../../Components/ui/Button";
 import Input from "../../Components/ui/Input";
 import toast, { Toaster } from "react-hot-toast";
@@ -23,7 +23,8 @@ const paymentMethods = [
 export default function Checkout() {
   const navigate = useNavigate();
   const { cart, updateQuantity, removeFromCart, clearCart, getTotalPrice } = useCart();
-  const { currentUser, isAuthenticated } = useAuth();
+  const currentUser = null;
+  const isAuthenticated = true;
   
   const [step, setStep] = useState(1); // 1: Review, 2: Delivery, 3: Payment, 4: Confirmation
   const [isProcessing, setIsProcessing] = useState(false);
@@ -34,7 +35,7 @@ export default function Checkout() {
     address: "",
     apartment: "",
     instructions: "",
-    phone: currentUser?.phone || ""
+    phone: ""
   });
   
   const [selectedPayment, setSelectedPayment] = useState("momo");
@@ -59,19 +60,11 @@ export default function Checkout() {
     setStep(step + 1);
   };
 
-  const handlePlaceOrder = async () => {
+  const handlePlaceOrder = () => {
     setIsProcessing(true);
-    
-    // Simulate order processing
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    // Generate mock order ID
-    const newOrderId = `ORD-${Date.now().toString().slice(-6)}`;
-    setOrderId(newOrderId);
     setOrderPlaced(true);
     setStep(4);
     clearCart();
-    
     setIsProcessing(false);
   };
 

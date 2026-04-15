@@ -1,9 +1,7 @@
 import { Link } from "react-router";
 import { Clock, Star } from "lucide-react";
-import { merchants } from "../../../data/merchants";
 
-export default function MenuItemCard({ id, name, price, image, short, merchantId }) {
-  const merchant = merchants.find(m => m.merchantId === merchantId);
+export default function MenuItemCard({ id, name, price, image, short, merchantId, merchant = {} }) {
   const formatPrice = (p) => `XAF ${p.toLocaleString()}`;
 
   return (

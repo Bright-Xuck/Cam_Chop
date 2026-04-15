@@ -1,54 +1,67 @@
-import { Pen, Trash2Icon } from "lucide-react";
+import { Pen, Trash2 } from "lucide-react";
 import "/src/table.module.css";
-import { useMerchant } from "../../../context/MerchantProvider";
-import { Menus } from "../../../data/menu";
 import { useState, useRef } from "react";
 import MenuItemForm from "./MenuItemForm";
 
-export default function ItemTable({ item, Setitem, setEdititem, edititem }) {
-  const { currentUser } = useMerchant();
+export default function ItemTable() {
   const [selectedMenu, setSelectedMenu] = useState(null);
   const form = useRef(null);
 
-  const activemenus = Menus.filter(
-    (eachmenu) => eachmenu.merchantId == currentUser.merchantId
-  );
+  // Lightweight static placeholders for presentation
+  const sampleMenus = [
+    {
+      menuid: "menu-1",
+      name: "Main Menu",
+      items: [
+        {
+          id: 1,
+          name: "Jollof Rice",
+          price: 2500,
+          category: "Main",
+          status: "In Stock",
+          image: "/photos/productimg/placeholder.jpg"
+        },
+        {
+          id: 2,
+          name: "Fried Plantain",
+          price: 500,
+          category: "Sides",
+          status: "In Stock",
+          image: "/photos/productimg/placeholder.jpg"
+        }
+      ]
+    },
+    {
+      menuid: "menu-2",
+      name: "Drinks",
+      items: [
+        {
+          id: 3,
+          name: "Ginger Drink",
+          price: 700,
+          category: "Beverage",
+          status: "In Stock",
+          image: "/photos/productimg/placeholder.jpg"
+        }
+      ]
+    }
+  ];
+
+  function Edititem(item) {
+    console.log("Edit item (placeholder)", item);
+    setSelectedMenu(item.menuid);
+    form.current?.scrollIntoView({ behavior: "smooth" });
+  }
 
   function Delete(id) {
-    Setitem(item.filter((product) => product.id !== id));
-  }
-
-  function Edititem(edititem) {
-    setEdititem(edititem);
-    if (!selectedMenu) {
-      setSelectedMenu(edititem.menuid);
-    }
-    setTimeout(() => {
-      form.current?.scrollIntoView({ behavior: "smooth" });
-    }, 100);
-  }
-
-  function clearform(){
-     const formEl = form.current; 
-    if (!formEl) return; 
-  formEl.querySelectorAll("input, textarea, select").forEach((el) => {
-    if (el.type === "checkbox" || el.type === "radio") {
-      el.checked = false;
-    } else {
-      el.value = "";
-    }
-  });
+    console.log("Delete item (placeholder)", id);
   }
 
   return (
     <div className="grid h-auto w-full">
-      {activemenus.map((menu, index) => {
-        const menuItems = item.filter(
-          (product) => product.menuid == menu.menuid
-        );
-
+      {sampleMenus.map((menu, index) => {
         return (
-          <div key={index} className="w-5/6 m-auto my-6">
+          <div key={menu.menuid} className="w-5/6 m-auto my-6">
             <h2 className="text-lg font-semibold mb-2">{menu.name}</h2>
             <table className="block overflow-hidden table-auto border-collapse shadow-2xl rounded-2xl whitespace-nowrap w-full overflow-x-auto">
               <thead className="bg-gray-200 text-black">
@@ -62,60 +75,21 @@ export default function ItemTable({ item, Setitem, setEdititem, edititem }) {
                 </tr>
               </thead>
               <tbody>
-                {menuItems.map((item) => (
-                  <tr
-                    key={item.id}
-                    className="border-b border-gray-100 hover:bg-gray-50"
-                  >
+                {menu.items.map((it) => (
+                  <tr key={it.id} className="border-b border-gray-100 hover:bg-gray-50">
                     <td className="p-3">
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className="w-12 h-12 object-cover rounded-lg"
-                      />
+                      <img src={it.image} alt={it.name} className="w-12 h-12 object-cover rounded-lg" />
                     </td>
-                    <td className="p-3 font-medium">{item.name}</td>
-                    <td className="p-3">XAF {item.price}</td>
-                    <td className="p-3">{item.category}</td>
+                    <td className="p-3 font-medium">{it.name}</td>
+                    <td className="p-3">XAF {it.price}</td>
+                    <td className="p-3">{it.category}</td>
                     <td className="p-3">
-                      <select
-                        value={item.status}
-                        onChange={(e) => {
-                          const newStatus = e.target.value;
-                          Setitem((prev) =>
-                            prev.map((it) =>
-                              it.id === item.id
-                                ? { ...it, status: newStatus }
-                                : it
-                            )
-                          );
-                        }}
-                        className={`rounded-2xl px-3 py-1 text-white text-sm
-                          ${
-                            item.status === "In Stock"
-                              ? "bg-green-600"
-                              : item.status === "Out of Stock"
-                              ? "bg-red-600"
-                              : "bg-gray-500"
-                          }`}
-                      >
-                        <option value="In Stock">In Stock</option>
-                        <option value="Out of Stock">Out of Stock</option>
-                        <option value="Draft">Draft</option>
-                      </select>
+                      <span className="rounded-2xl px-3 py-1 text-white text-sm bg-green-600">{it.status}</span>
                     </td>
                     <td className="p-3">
                       <span className="flex justify-around cursor-pointer">
-                        <Pen
-                          className="text-blue-500 hover:text-blue-700"
-                          size={18}
-                          onClick={() => Edititem(item)}
-                        />
-                        <Trash2Icon
-                          className="text-red-500 hover:text-red-700"
-                          size={18}
-                          onClick={() => Delete(item.id)}
-                        />
+                        <Pen className="text-blue-500 hover:text-blue-700" size={18} onClick={() => Edititem({ ...it, menuid: menu.menuid })} />
+                        <Trash2 className="text-red-500 hover:text-red-700" size={18} onClick={() => Delete(it.id)} />
                       </span>
                     </td>
                   </tr>
@@ -124,28 +98,18 @@ export default function ItemTable({ item, Setitem, setEdititem, edititem }) {
             </table>
             <button
               onClick={() => {
-                setEdititem(null);
-                clearform()
                 setSelectedMenu(menu.menuid);
-                setTimeout(() => {
-                  form.current?.scrollIntoView({ behavior: "smooth" });
-                }, 100);
+                form.current?.scrollIntoView({ behavior: "smooth" });
               }}
+              className="mt-4 bg-primary text-white px-4 py-2 rounded-md"
             >
               Add
             </button>
           </div>
         );
       })}
-      {selectedMenu && (
-        <MenuItemForm
-          menuid={selectedMenu}
-          item={item}
-          edititem={edititem}
-          Setitem={Setitem}
-          ref={form}
-        />
-      )}
+
+      {selectedMenu && <MenuItemForm menuid={selectedMenu} ref={form} />}
     </div>
   );
 }

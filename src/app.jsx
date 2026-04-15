@@ -1,6 +1,5 @@
 import "../src/index.css";
 import { HashRouter, Routes, Route } from "react-router";
-import { useState } from "react";
 
 // Customer Pages
 import ShopPage from "./pages/customer/ShopPage";
@@ -33,16 +32,7 @@ import MerchantAuthLogin from "./Components/merchant/auth/MerchantAuthLogin";
 import MerchantStoreView from "./Components/merchant/store-view/MerchantStoreView";
 import ProductDetailPage from "./Components/merchant/store-view/ProductDetailPage";
 
-// Data
-import { merchants } from "./data/merchants";
-import { products } from "./data/productdata";
-import { Users } from "./data/users";
-
 export default function App() {
-  const [userDatabase, setUserDatabase] = useState(Users);
-  const [merchantDatabase, setMerchantDatabase] = useState(merchants);
-  const [item, Setitem] = useState(products);
-  const [edititem, setEdititem] = useState(null);
 
   return (
     <HashRouter>
@@ -68,10 +58,7 @@ export default function App() {
           path="/signup"
           element={
             <CustomerPageLayout>
-              <CustomerAuthSignup
-                userDatabase={userDatabase}
-                setUserDatabase={setUserDatabase}
-              />
+              <CustomerAuthSignup />
             </CustomerPageLayout>
           }
         />
@@ -79,7 +66,7 @@ export default function App() {
           path="/login"
           element={
             <CustomerPageLayout>
-              <CustomerAuthLogin data={userDatabase} />
+              <CustomerAuthLogin />
             </CustomerPageLayout>
           }
         />
@@ -124,16 +111,11 @@ export default function App() {
         {/* ========== MERCHANT AUTH ROUTES ========== */}
         <Route
           path="/merchant/signup"
-          element={
-            <MerchantAuthSignup
-              merchantDatabase={merchantDatabase}
-              setMerchantDatabase={setMerchantDatabase}
-            />
-          }
+          element={<MerchantAuthSignup />}
         />
         <Route
           path="/merchant/login"
-          element={<MerchantAuthLogin merchantDatabase={merchantDatabase} />}
+          element={<MerchantAuthLogin />}
         />
 
         {/* ========== MERCHANT PORTAL ROUTES ========== */}
