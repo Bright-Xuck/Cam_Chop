@@ -1,0 +1,11 @@
+###
+POST  http://localhost:5000/auth/api/signup
+Content-Type: application/json
+
+{
+    "First Name":"kdjb",
+    "Last Name":"dkjb",
+    "email": "dsjkjk",
+    "password": "dsdcjksd",
+    "phone number": "38y83w"
+}

@@ -4,11 +4,32 @@ import { useNavigate, Link } from "react-router";
 export default function CustomerAuthSignup() {
   const navigate = useNavigate();
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
-    toast.success("Account created successfully!");
-    // proceed to login immediately; backend will handle account creation
-    navigate("/login");
+
+    const formData = new FormData(event.target)
+    const entries = Object.fromEntries(formData);
+    console.log(entries);
+    try {
+      const response = await fetch("http://localhost:5000/auth/api/signup", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(entries),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        toast.error("Something went wrong");
+        throw data;
+      }
+      toast.success("Account created successfully!");
+      navigate("/login");
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   return (
@@ -109,7 +130,7 @@ export default function CustomerAuthSignup() {
               <input
                 type="tel"
                 id="phone"
-                name="phone" 
+                name="phone"
                 required
                 autoComplete="tel"
                 className="block w-full rounded-md border-gray-300 py-2 px-3 shadow-sm focus:border-red-500 focus:ring-red-500 sm:text-sm"
@@ -140,8 +161,8 @@ export default function CustomerAuthSignup() {
           {/* Fine Print */}
           <div>
             <p className="text-center text-xs text-gray-500">
-              By tapping "Sign-Up", you agree to CamChop's Terms
-              and Privacy Policy.
+              By tapping "Sign-Up", you agree to CamChop's Terms and Privacy
+              Policy.
             </p>
           </div>
 
@@ -156,7 +177,6 @@ export default function CustomerAuthSignup() {
           </div>
         </form>
 
-      
         <div className="relative">
           <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t border-gray-300" />
@@ -168,7 +188,6 @@ export default function CustomerAuthSignup() {
           </div>
         </div>
 
-       
         <div className="mt-6 grid grid-cols-1 gap-3">
           <div>
             <Link
